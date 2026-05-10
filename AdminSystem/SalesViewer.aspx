@@ -1,15 +1,23 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SalesViewer.aspx.cs" Inherits="_1Viewer" %>
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using ClassLibrary;
 
-<!DOCTYPE html>
+public partial class _1_Viewer : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        clsSales ASale = (clsSales)Session["ASale"];
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-    </form>
-</body>
-</html>
+        Response.Write("Sale ID: " + ASale.SaleID + "<br />");
+        Response.Write("Order ID: " + ASale.OrderID + "<br />");
+        Response.Write("Sale Date: " + ASale.SaleDate.ToShortDateString() + "<br />");
+        Response.Write("Total Amount: " + ASale.TotalAmount + "<br />");
+        Response.Write("Payment Method: " + ASale.PaymentMethod + "<br />");
+        Response.Write("Sale Status: " + ASale.SaleStatus + "<br />");
+        Response.Write("Is Refunded: " + ASale.IsRefunded + "<br />");
+    }
+}
