@@ -16,10 +16,3 @@ namespace TestingUsers
         }
     }
 }
-
-namespace Testing1
-{
-    class clsUsers
-    {
-    }
-}
