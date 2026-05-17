@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SalesDataEntry.aspx.cs" Inherits="_1_DataEntry" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SalesDataEntry.aspx.cs" Inherits="_2_SalesDataEntry" %>
 
 <!DOCTYPE html>
 
@@ -39,11 +39,11 @@
             <asp:CheckBox ID="chkIsRefunded" runat="server" />
             <br /><br />
 
-            <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
-            <br /><br />
-
             <asp:Button ID="btnOK" runat="server" Text="OK" OnClick="btnOK_Click" />
             <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+            <br /><br />
+
+            <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
         </div>
     </form>
 </body>
