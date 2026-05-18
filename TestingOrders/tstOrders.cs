@@ -7,6 +7,15 @@ namespace Testing4
     [TestClass]
     public class tstOrders
     {
+        // good test data
+        // create some test data to pass the method
+        static string UserID = "123";
+        static string OrderDate = DateTime.Now.ToShortDateString();
+        static string OrderStatus = "Pending";
+        static string DeliveryAddress = "123 Main Street";
+        static string TotalAmount = "55.50";
+        static string DeliveryStatus = "Processing";
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -190,6 +199,87 @@ namespace Testing4
                 OK = false;
             }
             Assert.IsTrue(OK);
+        }
+
+        
+        // NEW VALIDATION TESTS FOR MIDDLE LAYER
+       
+
+        [TestMethod]
+        public void ValidMethodOK()
+        {
+            // create an instance of the class we want to create
+            clsOrders AnOrders = new clsOrders();
+            // string variable to store any error message
+            String Error = "";
+            // invoke the method
+            Error = AnOrders.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount, DeliveryStatus);
+            // test to see that the result is correct
+            Assert.AreEqual("", Error);
+        }
+
+        // ------ DeliveryAddress Validation Tests ------
+
+        [TestMethod]
+        public void DeliveryAddressMinLessOne()
+        {
+            // create an instance of the class we want to create
+            clsOrders AnOrders = new clsOrders();
+            // string variable to store any error message
+            String Error = "";
+            // create some test data to pass to the method
+            string DeliveryAddress = ""; // this should trigger an error
+            // invoke the method
+            Error = AnOrders.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount, DeliveryStatus);
+            // test to see that the result is correct
+            Assert.AreNotEqual("", Error);
+        }
+
+        [TestMethod]
+        public void DeliveryAddressMin()
+        {
+            clsOrders AnOrders = new clsOrders();
+            String Error = "";
+            string DeliveryAddress = "a"; 
+            Error = AnOrders.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount, DeliveryStatus);
+            Assert.AreEqual("", Error);
+        }
+
+        [TestMethod]
+        public void DeliveryAddressMax()
+        {
+            clsOrders AnOrders = new clsOrders();
+            String Error = "";
+            string DeliveryAddress = "";
+            DeliveryAddress = DeliveryAddress.PadRight(50, 'a'); // boundary check
+            Error = AnOrders.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount, DeliveryStatus);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void DeliveryAddressMaxPlusOne()
+        {
+            clsOrders AnOrders = new clsOrders();
+            String Error = "";
+            string DeliveryAddress = "";
+            DeliveryAddress = DeliveryAddress.PadRight(51, 'a'); // this should fail
+            Error = AnOrders.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount, DeliveryStatus);
+            Assert.AreNotEqual("", Error);
+        }
+
+        // ------ OrderDate Validation Tests ------
+
+        [TestMethod]
+        public void OrderDateExtremeMin()
+        {
+            clsOrders AnOrders = new clsOrders();
+            String Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddYears(-100);
+            string OrderDate = TestDate.ToString();
+            Error = AnOrders.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount, DeliveryStatus);
+            Assert.AreNotEqual("", Error);
         }
     }
 }
