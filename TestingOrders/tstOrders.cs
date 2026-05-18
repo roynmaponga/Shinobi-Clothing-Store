@@ -1,5 +1,4 @@
-﻿
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using ClassLibrary;
 
@@ -14,37 +13,44 @@ namespace Testing4
             //
             clsOrders AnOrders = new clsOrders();
             Assert.IsNotNull(AnOrders);
-
         }
-        //---Order  ID----
+
         [TestMethod]
-        public void OrderIDProperly()
+        public void FindMethodOK()
+        {
+            // create an instance of the class we want to create
+            clsOrders AnOrders = new clsOrders();
+            // Boolean variable to store the result of the validation
+            Boolean Found = false;
+            // create some test data to use with the method
+            Int32 OrderID = 1;
+            // invoke the method
+            Found = AnOrders.Find(OrderID);
+            // test to see that the result is true
+            Assert.IsTrue(Found);
+        }
+
+        //------ Order ID ------
+        [TestMethod]
+        public void OrderIDPropertyOK()
         {
             clsOrders AnOrders = new clsOrders();
-            int TestData = 1;
+            Int32 TestData = 1;
             AnOrders.OrderID = TestData;
             Assert.AreEqual(AnOrders.OrderID, TestData);
         }
-        //----- UserID-----
+
+        //------ User ID ------
         [TestMethod]
         public void UserIDPropertyOK()
         {
             clsOrders AnOrders = new clsOrders();
-            int TestData = 123;
+            Int32 TestData = 123;
             AnOrders.UserID = TestData;
             Assert.AreEqual(AnOrders.UserID, TestData);
         }
-        //--OrderDate
-        [TestMethod]
-        public void OrderDatePropertOK()
-        {
-            clsOrders AnOrders = new clsOrders();
-            DateTime TestDate = DateTime.Now.Date;
-            AnOrders.OrderDate = TestDate;
-            Assert.AreEqual(AnOrders.OrderDate, TestDate);
 
-        }
-        // ----- OrderStatus -----
+        //------ OrderStatus ------
         [TestMethod]
         public void OrderStatusPropertyOK()
         {
@@ -52,9 +58,9 @@ namespace Testing4
             string TestData = "Pending";
             AnOrders.OrderStatus = TestData;
             Assert.AreEqual(AnOrders.OrderStatus, TestData);
-
         }
-        // ----- DeliveryAddress -----
+
+        //------ DeliveryAddress ------
         [TestMethod]
         public void DeliveryAddressPropertyOK()
         {
@@ -63,24 +69,127 @@ namespace Testing4
             AnOrders.DeliveryAddress = TestData;
             Assert.AreEqual(AnOrders.DeliveryAddress, TestData);
         }
-        // ----- TotalAmount -----
+
+        // Find methods 
+
         [TestMethod]
-        public void TotalAmountPropertyOK()
+        public void FindOrderIDOK()
         {
             clsOrders AnOrders = new clsOrders();
-            // Using decimal type to match your SQL decimal backend design
-            decimal TestData = 150.00m;
-            AnOrders.TotalAmount = TestData;
-            Assert.AreEqual(AnOrders.TotalAmount, TestData);
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 OrderID = 1;
+            Found = AnOrders.Find(OrderID);
+            if (AnOrders.OrderID != 1)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
         }
-        // ----- IsPaid -----
+
         [TestMethod]
-        public void IsPaidPropertyOK()
+        public void FindUserIDOK()
         {
             clsOrders AnOrders = new clsOrders();
-            bool TestData = true; // Maps directly to SQL 'bit'
-            AnOrders.IsPaid = TestData;
-            Assert.AreEqual(AnOrders.IsPaid, TestData);
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 OrderID = 1;
+            Found = AnOrders.Find(OrderID);
+            if (AnOrders.UserID != 123)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void FindOrderDateOK()
+        {
+            clsOrders AnOrders = new clsOrders();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 OrderID = 1;
+            Found = AnOrders.Find(OrderID);
+            if (Convert.ToDateTime(AnOrders.OrderDate) != Convert.ToDateTime("18/05/2026"))
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void FindOrderStatusOK()
+        {
+            clsOrders AnOrders = new clsOrders();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 OrderID = 1;
+            Found = AnOrders.Find(OrderID);
+            if (AnOrders.OrderStatus != "Pending")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void FindDeliveryAddressOK()
+        {
+            clsOrders AnOrders = new clsOrders();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 OrderID = 1;
+            Found = AnOrders.Find(OrderID);
+            if (AnOrders.DeliveryAddress != "123 Main Street")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void FindTotalAmountOK()
+        {
+            clsOrders AnOrders = new clsOrders();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 OrderID = 1;
+            Found = AnOrders.Find(OrderID);
+            if (AnOrders.TotalAmount != 55.50m)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void FindIsPaidOK()
+        {
+            clsOrders AnOrders = new clsOrders();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 OrderID = 1;
+            Found = AnOrders.Find(OrderID);
+            if (AnOrders.IsPaid != true)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void FindDeliveryStatusOK()
+        {
+            clsOrders AnOrders = new clsOrders();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 OrderID = 1;
+            Found = AnOrders.Find(OrderID);
+            if (Convert.ToString(AnOrders.DeliveryStatus) != "Processing")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
         }
     }
 }
