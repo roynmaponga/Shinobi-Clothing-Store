@@ -1,14 +1,72 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+    }
+
+    protected void TextBox3_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void TextBox4_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void TextBox2_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void TextBox1_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnOK_Click(object sender, EventArgs e)
+    {
+        //create a new instances of clsOrder
+        clsOrders AnOrder =new clsOrders();
+
+        //capture the data from the form text boxes
+
+        // capture order id
+        AnOrder.OrderID = Convert.ToInt32(txtOrderID.Text);
+        //capture user id
+        AnOrder.UserID = Convert.ToInt32(txtUserID.Text);
+        // capture total amount
+        AnOrder.TotalAmount = Convert.ToDecimal(txtTotalAmount.Text);
+        // capture order date
+        AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
+        //capture delivery status
+        AnOrder.DeliveryStatus = ddlDeliveryStatus.SelectedValue;
+
+        // apture is paid check box
+
+        AnOrder.IsPaid = chkPaid.Checked;
+
+        //store the object in session memory space
+        Session["AnOrder"] = AnOrder;
+
+        //navigate to the view page
+        Response.Redirect("OrdersViewer.aspx");
 
     }
 }
