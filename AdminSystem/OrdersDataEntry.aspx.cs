@@ -43,30 +43,46 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void btnOK_Click(object sender, EventArgs e)
     {
         //create a new instances of clsOrder
-        clsOrders AnOrder =new clsOrders();
+        clsOrders AnOrder = new clsOrders();
 
-        //capture the data from the form text boxes
+        string OrderID = txtOrderID.Text;
+        string UserID = txtUserID.Text;
+        String TotalAmount = txtTotalAmount.Text;
+        string OrderDate = txtOrderDate.Text;
+        string DeliveryStatus = ddlDeliveryStatus.SelectedValue;
+        String Error = "";
 
-        // capture order id
-        AnOrder.OrderID = Convert.ToInt32(txtOrderID.Text);
-        //capture user id
-        AnOrder.UserID = Convert.ToInt32(txtUserID.Text);
-        // capture total amount
-        AnOrder.TotalAmount = Convert.ToDecimal(txtTotalAmount.Text);
-        // capture order date
-        AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
-        //capture delivery status
-        AnOrder.DeliveryStatus = ddlDeliveryStatus.SelectedValue;
+        Error = AnOrder.Valid(OrderID, UserID, TotalAmount, OrderDate, DeliveryStatus);
 
-        // apture is paid check box
+        if (Error == "")
+        {
 
-        AnOrder.IsPaid = chkPaid.Checked;
 
-        //store the object in session memory space
-        Session["AnOrder"] = AnOrder;
+            // capture order id
+            AnOrder.OrderID = Convert.ToInt32(txtOrderID.Text);
+            //capture user id
+            AnOrder.UserID = Convert.ToInt32(txtUserID.Text);
+            // capture total amount
+            AnOrder.TotalAmount = Convert.ToDecimal(txtTotalAmount.Text);
+            // capture order date
+            AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
+            //capture delivery status
+            AnOrder.DeliveryStatus = ddlDeliveryStatus.SelectedValue;
 
-        //navigate to the view page
-        Response.Redirect("OrdersViewer.aspx");
+            // apture is paid check box
 
+            AnOrder.IsPaid = chkPaid.Checked;
+
+            //store the object in session memory space
+            Session["AnOrder"] = AnOrder;
+
+            //navigate to the view page
+            Response.Redirect("OrdersViewer.aspx");
+
+        }
+        else
+        {
+            lblerror.Text = Error;
+        }
     }
 }

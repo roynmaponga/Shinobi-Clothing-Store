@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace ClassLibrary
 {
@@ -177,5 +178,71 @@ namespace ClassLibrary
             // return any error messages
             return Error;
         }
+
+        public string Valid(string orderID, string userID, string totalAmount, string orderDate, string deliveryStatus)
+        {
+            // create a string variable to store error messages
+            string Error = "";
+
+            // 1. Check if the orderID is blank
+            if (string.IsNullOrEmpty(orderID))
+            {
+                Error = Error + "The Order ID cannot be blank. ";
+            }
+
+            // 2. Check if the userID is blank
+            if (string.IsNullOrEmpty(userID))
+            {
+                Error = Error + "The User ID cannot be blank. ";
+            }
+
+            // 3. Logic for Order Date 
+            try
+            {
+                
+                DateTime TempDate;
+                
+                if (string.IsNullOrEmpty(orderDate))
+                {
+                    Error = Error + "The Order Date cannot be blank. ";
+                }
+                else if (!DateTime.TryParse(orderDate, out TempDate))
+                {
+                    Error = Error + "The date must be a valid calendar date format (e.g. dd/mm/yyyy). ";
+                }
+            }
+            catch (Exception)
+            {
+                Error = Error + "Critical error validating date data. ";
+            }
+
+            //-----------logic for total amount value------------
+            try
+            {
+                // temp variable to hold the decimal conversion check
+                Decimal TempAmount;
+                if (string.IsNullOrEmpty(totalAmount))
+                {
+                    Error = Error + "The Total Amount cannot be blank. ";
+                }
+                // check if it converts to a decimal cleanly and isn't a negative value
+                else if (!Decimal.TryParse(totalAmount, out TempAmount))
+                {
+                    Error = Error + "The Total Amount must be a valid currency number. ";
+                }
+                else if (TempAmount < 0)
+                {
+                    Error = Error + "The Total Amount cannot be negative. ";
+                }
+            }
+            catch (Exception)
+            {
+                Error = Error + "Critical error validating total amount. ";
+            }
+
+            //
+            return Error;
+        }
+
     }
 }
