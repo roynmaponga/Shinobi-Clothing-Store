@@ -9,5 +9,6 @@
         public string DeliveryAddress { get; set; }
         public decimal TotalAmount { get; set; }
         public bool IsPaid { get; set; }
+        public object DeliveryStatus { get; set; }
     }
 }
