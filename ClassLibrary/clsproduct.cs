@@ -4,6 +4,7 @@ namespace ClassLibrary
 {
     public class    Clsproduct
     {
+       
         public Clsproduct()
         {
         }
@@ -15,5 +16,6 @@ namespace ClassLibrary
         public string HouseNo { get; set; }
         public string Postcode { get; set; }
         public string Town { get; set; }
+        public object Colour { get; set; }
     }
 }
