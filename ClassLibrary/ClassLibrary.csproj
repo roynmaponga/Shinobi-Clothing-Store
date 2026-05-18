@@ -112,12 +112,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsDataConnection.cs" />
+    <Compile Include="Clsnewproduct.cs" />
     <Compile Include="clsproduct.cs" />
     <Compile Include="clsOrders.cs" />
     <Compile Include="clsSales.cs" />
     <Compile Include="clsSalesCollection.cs" />
     <Compile Include="ClsUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="txtcolour.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tstnewproduct.cs" />
     <Compile Include="Tstproduct.cs" />
     <Compile Include="TstproductBase.cs" />
   </ItemGroup>
