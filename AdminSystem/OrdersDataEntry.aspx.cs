@@ -73,11 +73,17 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
             AnOrder.IsPaid = chkPaid.Checked;
 
-            //store the object in session memory space
-            Session["AnOrder"] = AnOrder;
+            //create new instances of order collection
+            clsOrdersCollection Orderslist = new clsOrdersCollection();
+            //set the thisorder property
+            Orderslist.ThisOrder = AnOrder;
+            //aDD the new lsit
+            Orderslist.Add();
+
+            
 
             //navigate to the view page
-            Response.Redirect("OrdersViewer.aspx");
+            Response.Redirect("OrdersList.aspx");
 
         }
         else
