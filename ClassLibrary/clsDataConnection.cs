@@ -33,9 +33,10 @@ public class clsDataConnection
 
     private string GetConnectionString()
     {
-        System.Net.WebClient client = new System.Net.WebClient();
-        string downloadString = client.DownloadString("http://localhost:5000/");
-        return downloadString;
+        // Direct connection to your DMU university SQL Server instance
+        string connectionString = @"Data Source=v00egd00002l.lec-admin.dmu.ac.uk;Initial Catalog=p2878247;User ID=p2878247;Password=@ShinobiSQLDatabase1234!;";
+
+        return connectionString;
     }
 
     public string GetDBName()

@@ -92,7 +92,7 @@ namespace Testing2
             string error = "";
             string color = "a";
             error = Anewproduct.Valid("category", color, "Medium", "9.99", "100", DateTime.Now.Date.ToString());
-            Assert.AreEqual(error, "");
+            Assert.AreEqual("", error);
         }
         [TestMethod]
         public void HouseNOMinPlusOne()
@@ -102,7 +102,7 @@ namespace Testing2
             string color = "aa";
             error = Anewproduct.Valid(color, "category", "Medium", "9.99", "100", DateTime.Now.Date.ToString());
 
-            Assert.AreEqual(error, "");
+            Assert.AreEqual("", error);
 
         }
         [TestMethod]
@@ -112,7 +112,7 @@ namespace Testing2
             string error = "";
             string color = "aaaaaaaaaaaaaaaaaaaaaaaaa";
             error = Anewproduct.Valid(color, "category", "Medium", "9.99", "100", DateTime.Now.Date.ToString());
-            Assert.AreEqual(error, "");
+            Assert.AreEqual("", error);
         }
         [TestMethod]
         public void HouseNoMid()
@@ -121,7 +121,7 @@ namespace Testing2
             string error = "";
             string color = "aaaaaaaaaaaaaaaaaaaaaa";
             error = Anewproduct.Valid(color, "category", "Medium", "9.99", "100", DateTime.Now.Date.ToString());
-            Assert.AreNotEqual(error, "");
+            Assert.AreNotEqual("", error);
         }
         [TestMethod]
         public void HouseNoPlusOne()
@@ -130,7 +130,7 @@ namespace Testing2
             string error = "";
             string color = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
             error = Anewproduct.Valid(color, "category", "Medium", "9.99", "100", DateTime.Now.Date.ToString());
-            Assert.AreNotEqual(error, "");
+            Assert.AreNotEqual("", error);
         }
         public string Valid(string color, string category, string size, string price, string stockquantity, string dateadded)
         {
@@ -151,3 +151,4 @@ namespace Testing2
 #pragma warning restore IDE0060 // Remove unused parameter
         }
     }
+}
