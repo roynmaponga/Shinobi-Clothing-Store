@@ -16,22 +16,29 @@ public partial class _1_List : System.Web.UI.Page
             DisplayOrders();
         }
     }
-        void DisplayOrders()
+    void DisplayOrders()
     {
-            // create an instance of the Orders collection
-            clsOrdersCollection Orders = new clsOrdersCollection();
+        // create an instance of the Orders collection
+        clsOrdersCollection Orders = new clsOrdersCollection();
 
-            // set the data source to list of orders in the collection
-            lstOrdersList.DataSource = Orders.OrdersList;
+        // set the data source to list of orders in the collection
+        lstOrdersList.DataSource = Orders.OrdersList;
 
-            // set the name of the primary key
-            lstOrdersList.DataValueField = "OrderID";
+        // set the name of the primary key
+        lstOrdersList.DataValueField = "OrderID";
 
-            // set the data field to display in the list box
-            lstOrdersList.DataTextField = "OrderStatus";
+        // set the data field to display in the list box
+        lstOrdersList.DataTextField = "OrderStatus";
 
-            // bind the data to the list
-            lstOrdersList.DataBind();
-        }
-    
+        // bind the data to the list
+        lstOrdersList.DataBind();
+    }
+
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        Session["OrderID"] = -1;
+
+        Response.Redirect("OrdersDataEntry.aspx");
+    }
 }
