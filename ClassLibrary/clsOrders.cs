@@ -71,6 +71,8 @@ namespace ClassLibrary
             set { mDeliveryStatus = value; }
         }
 
+        public bool Active { get; set; }
+
         // The Find Method
         public bool Find(int orderID)
         {

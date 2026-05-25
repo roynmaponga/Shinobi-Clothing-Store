@@ -102,5 +102,42 @@ namespace Testing4
             // Test to see that the two values are the same
             Assert.AreEqual(AllOrders.Count, TestList.Count);
         }
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            // create an instance of the class we want to create
+            clsOrdersCollection AllOrders = new clsOrdersCollection();
+
+            // create the item of test data
+            clsOrders TestItem = new clsOrders();
+
+            // variable to store the primary key
+            Int32 PrimaryKey = 0;
+
+            // set its properties matching your orders database schema
+            TestItem.IsPaid = true;
+            TestItem.OrderID = 1;
+            TestItem.OrderDate = DateTime.Now.Date;
+            TestItem.DeliveryAddress = "123 University Road, Leicester";
+            TestItem.OrderStatus = "Pending";
+            TestItem.TotalAmount = 45.99m;
+
+            // set ThisOrder to the test data
+            AllOrders.ThisOrder = TestItem;
+
+            // add the record to the database and retrieve its generated primary key
+            PrimaryKey = AllOrders.Add();
+
+            // set the primary key of the test data to match what came back from the DB
+            TestItem.OrderID = PrimaryKey;
+
+            // find the record using the collection's search method
+            AllOrders.ThisOrder.Find(PrimaryKey);
+
+            // test to see that the two values are the same
+            Assert.AreEqual(AllOrders.ThisOrder, TestItem);
+
+
+        }
     }
 }

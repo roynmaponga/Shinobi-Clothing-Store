@@ -5,6 +5,13 @@ namespace ClassLibrary
 {
     public class clsOrdersCollection
     {
+        //private data 
+        List<clsOrders> mOrders = new List<clsOrders>();
+
+        //
+        clsOrders mThisOrder = new clsOrders();
+
+
         // Constructor for the class
         public clsOrdersCollection()
         {
@@ -25,21 +32,51 @@ namespace ClassLibrary
                 // Create a blank order object
                 clsOrders AnOrder = new clsOrders();
 
-                // Read in the fields for the current record matching your table columns
-                AnOrder.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
-                AnOrder.UserID = Convert.ToInt32(DB.DataTable.Rows[Index]["UserID"]);
-                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
-                AnOrder.OrderStatus = Convert.ToString(DB.DataTable.Rows[Index]["OrderStatus"]);
-                AnOrder.DeliveryAddress = Convert.ToString(DB.DataTable.Rows[Index]["DeliveryAddress"]);
-                AnOrder.TotalAmount = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalAmount"]);
-                AnOrder.IsPaid = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsPaid"]);
+                // Read in the fields for the current record safely checking for DBNull
+
+                // OrderID (Primary Key - usually never null, but kept safe)
+                AnOrder.OrderID = Convert.IsDBNull(DB.DataTable.Rows[Index]["OrderID"])
+                    ? 0
+                    : Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
+
+                // UserID (Allows Nulls in your database)
+                AnOrder.UserID = Convert.IsDBNull(DB.DataTable.Rows[Index]["UserID"])
+                    ? 0
+                    : Convert.ToInt32(DB.DataTable.Rows[Index]["UserID"]);
+
+                // OrderDate (Allows Nulls)
+                AnOrder.OrderDate = Convert.IsDBNull(DB.DataTable.Rows[Index]["OrderDate"])
+                    ? DateTime.Now
+                    : Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
+
+                // OrderStatus (Allows Nulls)
+                AnOrder.OrderStatus = Convert.IsDBNull(DB.DataTable.Rows[Index]["OrderStatus"])
+                    ? ""
+                    : Convert.ToString(DB.DataTable.Rows[Index]["OrderStatus"]);
+
+                // DeliveryAddress (Allows Nulls)
+                AnOrder.DeliveryAddress = Convert.IsDBNull(DB.DataTable.Rows[Index]["DeliveryAddress"])
+                    ? ""
+                    : Convert.ToString(DB.DataTable.Rows[Index]["DeliveryAddress"]);
+
+                // TotalAmount (Allows Nulls)
+                AnOrder.TotalAmount = Convert.IsDBNull(DB.DataTable.Rows[Index]["TotalAmount"])
+                    ? 0.00m
+                    : Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalAmount"]);
+
+                // IsPaid (Allows Nulls)
+                AnOrder.IsPaid = Convert.IsDBNull(DB.DataTable.Rows[Index]["IsPaid"])
+                    ? false
+                    : Convert.ToBoolean(DB.DataTable.Rows[Index]["IsPaid"]);
 
                 // Add the record to the private data member List
                 mOrdersList.Add(AnOrder);
+
                 // Point to the next record
                 Index++;
             }
         }
+        
 
         // private data member for the List
         private List<clsOrders> mOrdersList = new List<clsOrders>();
@@ -71,6 +108,35 @@ namespace ClassLibrary
         }
 
         // public property for ThisOrder
-        public clsOrders ThisOrder { get; set; }
+        public clsOrders ThisOrder
+        {
+            get
+            {
+                return mThisOrder;
+            }
+            set
+            {
+                mThisOrder = value;
+            }
+        }
+
+        public int Add()
+        {
+            
+            // adds a record to the database based on the values of mThisOrder
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+
+            // set the parameters for the stored procedure
+            DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
+            DB.AddParameter("@DeliveryAddress", mThisOrder.DeliveryAddress);
+            DB.AddParameter("@OrderStatus", mThisOrder.OrderStatus);
+            DB.AddParameter("@TotalAmount", mThisOrder.TotalAmount);
+            DB.AddParameter("@IsPaid", mThisOrder.IsPaid);
+
+            // execute the query returning the primary key value
+            return DB.Execute("sproc_tblOrders_Insert");
+        }
     }
+    
 }
