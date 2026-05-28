@@ -117,7 +117,7 @@ namespace TestingSales
             Int32 PrimaryKey = 0;
 
             // Use an OrderID that is not already used in tblSales
-            TestItem.OrderID = 9;
+            TestItem.OrderID = 10;
             TestItem.SaleDate = DateTime.Now.Date;
             TestItem.TotalAmount = 21.00m;
             TestItem.PaymentMethod = "card";
