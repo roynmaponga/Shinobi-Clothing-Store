@@ -25,7 +25,7 @@ namespace TestingSales
             clsSales TestItem = new clsSales();
 
             TestItem.SaleID = 1;
-            TestItem.OrderID = 1;
+            TestItem.OrderID = 5;
             TestItem.SaleDate = DateTime.Now.Date;
             TestItem.TotalAmount = 21.00m;
             TestItem.PaymentMethod = "card";
@@ -117,7 +117,7 @@ namespace TestingSales
             Int32 PrimaryKey = 0;
 
             // Use an OrderID that is not already used in tblSales
-            TestItem.OrderID = 4;
+            TestItem.OrderID = 7;
             TestItem.SaleDate = DateTime.Now.Date;
             TestItem.TotalAmount = 21.00m;
             TestItem.PaymentMethod = "card";
