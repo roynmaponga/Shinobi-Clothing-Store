@@ -53,10 +53,8 @@ namespace ClassLibrary
         // Add method
         public int Add()
         {
-            // connect to the database
             clsDataConnection DB = new clsDataConnection();
 
-            // set the parameters for the stored procedure
             DB.AddParameter("@OrderID", mThisSale.OrderID);
             DB.AddParameter("@SaleDate", mThisSale.SaleDate);
             DB.AddParameter("@TotalAmount", mThisSale.TotalAmount);
@@ -64,8 +62,23 @@ namespace ClassLibrary
             DB.AddParameter("@SaleStatus", mThisSale.SaleStatus);
             DB.AddParameter("@IsRefunded", mThisSale.IsRefunded);
 
-            // execute the stored procedure and return the new primary key
             return DB.Execute("sproc_tblSales_Insert");
+        }
+
+        // Update method
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@SaleID", mThisSale.SaleID);
+            DB.AddParameter("@OrderID", mThisSale.OrderID);
+            DB.AddParameter("@SaleDate", mThisSale.SaleDate);
+            DB.AddParameter("@TotalAmount", mThisSale.TotalAmount);
+            DB.AddParameter("@PaymentMethod", mThisSale.PaymentMethod);
+            DB.AddParameter("@SaleStatus", mThisSale.SaleStatus);
+            DB.AddParameter("@IsRefunded", mThisSale.IsRefunded);
+
+            DB.Execute("sproc_tblSales_Update");
         }
     }
 }
