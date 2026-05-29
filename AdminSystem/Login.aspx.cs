@@ -11,8 +11,10 @@ public partial class Login : System.Web.UI.Page
     {
         if (txtUsername.Text == "admin" && txtPassword.Text == "password")
         {
-            Session["UserLoggedIn"] = true;
+            // store the username in the session
+            Session["Username"] = txtUsername.Text;
 
+            // redirect to the team main menu
             Response.Redirect("TeamMainMenu.aspx");
         }
         else
