@@ -8,6 +8,15 @@ namespace ClassLibrary
         private List<clsSales> mSalesList = new List<clsSales>();
         private clsSales mThisSale = new clsSales();
 
+        public clsSalesCollection()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.Execute("sproc_tblSales_SelectAll");
+
+            PopulateArray(DB);
+        }
+
         public List<clsSales> SalesList
         {
             get
@@ -80,6 +89,33 @@ namespace ClassLibrary
             DB.AddParameter("@SaleID", mThisSale.SaleID);
 
             DB.Execute("sproc_tblSales_Delete");
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            Int32 Index = 0;
+            Int32 RecordCount = 0;
+
+            RecordCount = DB.Count;
+
+            mSalesList = new List<clsSales>();
+
+            while (Index < RecordCount)
+            {
+                clsSales ASale = new clsSales();
+
+                ASale.SaleID = Convert.ToInt32(DB.DataTable.Rows[Index]["SaleID"]);
+                ASale.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
+                ASale.SaleDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["SaleDate"]);
+                ASale.TotalAmount = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalAmount"]);
+                ASale.PaymentMethod = Convert.ToString(DB.DataTable.Rows[Index]["PaymentMethod"]);
+                ASale.SaleStatus = Convert.ToString(DB.DataTable.Rows[Index]["SaleStatus"]);
+                ASale.IsRefunded = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsRefunded"]);
+
+                mSalesList.Add(ASale);
+
+                Index++;
+            }
         }
     }
 }
