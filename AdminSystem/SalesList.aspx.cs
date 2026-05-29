@@ -25,7 +25,7 @@ public partial class SalesList : System.Web.UI.Page
         lstSalesList.DataValueField = "SaleID";
 
         // set the data field to display
-        lstSalesList.DataTextField = "SaleID";
+        lstSalesList.DataTextField = "SaleStatus";
 
         // bind the data to the list
         lstSalesList.DataBind();
@@ -74,5 +74,35 @@ public partial class SalesList : System.Web.UI.Page
         {
             lblError.Text = "Please select a sale to delete.";
         }
+    }
+
+    protected void btnApply_Click(object sender, EventArgs e)
+    {
+        // create an instance of the Sales collection
+        clsSalesCollection Sales = new clsSalesCollection();
+
+        // apply the filter using sale status
+        Sales.ReportBySaleStatus(txtSaleStatus.Text);
+
+        // display the filtered list
+        lstSalesList.DataSource = Sales.SalesList;
+        lstSalesList.DataValueField = "SaleID";
+        lstSalesList.DataTextField = "SaleStatus";
+        lstSalesList.DataBind();
+
+        // clear error message
+        lblError.Text = "";
+    }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        // clear the filter box
+        txtSaleStatus.Text = "";
+
+        // display all sales again
+        DisplaySales();
+
+        // clear error message
+        lblError.Text = "";
     }
 }
