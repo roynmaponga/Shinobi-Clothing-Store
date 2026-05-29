@@ -234,9 +234,9 @@ namespace TestingSales
 
 
 
-            // Use an OrderID that is not already used in tblSales
+            // Use a fresh unused OrderID
 
-            TestItem.OrderID = 11;
+            TestItem.OrderID = 22;
 
             TestItem.SaleDate = DateTime.Now.Date;
 
@@ -302,9 +302,9 @@ namespace TestingSales
 
 
 
-            // First unused OrderID for inserting the record
+            // First fresh unused OrderID for insert
 
-            TestItem.OrderID = 12;
+            TestItem.OrderID = 24;
 
             TestItem.SaleDate = DateTime.Now.Date;
 
@@ -330,9 +330,9 @@ namespace TestingSales
 
 
 
-            // Second unused OrderID for updating the record
+            // Second fresh unused OrderID for update
 
-            TestItem.OrderID = 13;
+            TestItem.OrderID = 25;
 
             TestItem.SaleDate = DateTime.Now.Date;
 
@@ -371,6 +371,88 @@ namespace TestingSales
             Assert.AreEqual(TestItem.SaleStatus, AllSales.ThisSale.SaleStatus);
 
             Assert.AreEqual(TestItem.IsRefunded, AllSales.ThisSale.IsRefunded);
+
+        }
+
+
+
+        [TestMethod]
+
+        public void DeleteMethodOK()
+
+        {
+
+            clsSalesCollection AllSales = new clsSalesCollection();
+
+
+
+            clsSales TestItem = new clsSales();
+
+
+
+            Int32 PrimaryKey = 0;
+
+            Boolean Found = false;
+
+
+
+            // Use a fresh unused OrderID
+
+            TestItem.OrderID = 20;
+
+            TestItem.SaleDate = DateTime.Now.Date;
+
+            TestItem.TotalAmount = 21.00m;
+
+            TestItem.PaymentMethod = "card";
+
+            TestItem.SaleStatus = "completed";
+
+            TestItem.IsRefunded = false;
+
+
+
+            // Add the record
+
+            AllSales.ThisSale = TestItem;
+
+
+
+            PrimaryKey = AllSales.Add();
+
+
+
+            // Set the primary key
+
+            TestItem.SaleID = PrimaryKey;
+
+
+
+            // Set ThisSale again with the correct SaleID
+
+            AllSales.ThisSale = TestItem;
+
+
+
+            // Delete the record
+
+            AllSales.Delete();
+
+
+
+            // Use a new Sales object to check if the record still exists
+
+            clsSales DeletedSale = new clsSales();
+
+
+
+            Found = DeletedSale.Find(PrimaryKey);
+
+
+
+            // The deleted record should not be found
+
+            Assert.IsFalse(Found);
 
         }
 
