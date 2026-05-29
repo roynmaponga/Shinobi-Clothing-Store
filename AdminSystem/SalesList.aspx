@@ -25,6 +25,20 @@
             <br />
             <br />
 
+            <asp:Label ID="lblSaleStatus" runat="server" Text="Enter Sale Status:"></asp:Label>
+            &nbsp;
+            <asp:TextBox ID="txtSaleStatus" runat="server"></asp:TextBox>
+
+            <br />
+            <br />
+
+            <asp:Button ID="btnApply" runat="server" Text="Apply Filter" OnClick="btnApply_Click" />
+            &nbsp;
+            <asp:Button ID="btnClear" runat="server" Text="Clear Filter" OnClick="btnClear_Click" />
+
+            <br />
+            <br />
+
             <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
         </div>
     </form>
