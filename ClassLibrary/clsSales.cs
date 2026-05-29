@@ -99,15 +99,28 @@ namespace ClassLibrary
 
         public bool Find(int SaleID)
         {
-            mSaleID = 1;
-            mOrderID = 1;
-            mSaleDate = Convert.ToDateTime("10/05/2026");
-            mTotalAmount = 21.00m;
-            mPaymentMethod = "Card";
-            mSaleStatus = "Completed";
-            mIsRefunded = false;
+            clsDataConnection DB = new clsDataConnection();
 
-            return true;
+            DB.AddParameter("@SaleID", SaleID);
+
+            DB.Execute("sproc_tblSales_FilterBySaleID");
+
+            if (DB.Count == 1)
+            {
+                mSaleID = Convert.ToInt32(DB.DataTable.Rows[0]["SaleID"]);
+                mOrderID = Convert.ToInt32(DB.DataTable.Rows[0]["OrderID"]);
+                mSaleDate = Convert.ToDateTime(DB.DataTable.Rows[0]["SaleDate"]);
+                mTotalAmount = Convert.ToDecimal(DB.DataTable.Rows[0]["TotalAmount"]);
+                mPaymentMethod = Convert.ToString(DB.DataTable.Rows[0]["PaymentMethod"]);
+                mSaleStatus = Convert.ToString(DB.DataTable.Rows[0]["SaleStatus"]);
+                mIsRefunded = Convert.ToBoolean(DB.DataTable.Rows[0]["IsRefunded"]);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /****************** VALID METHOD ******************/

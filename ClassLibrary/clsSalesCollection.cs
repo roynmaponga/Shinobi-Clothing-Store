@@ -5,13 +5,9 @@ namespace ClassLibrary
 {
     public class clsSalesCollection
     {
-        // private data member for the list
         private List<clsSales> mSalesList = new List<clsSales>();
-
-        // private data member for ThisSale
         private clsSales mThisSale = new clsSales();
 
-        // public property for the Sales list
         public List<clsSales> SalesList
         {
             get
@@ -24,7 +20,6 @@ namespace ClassLibrary
             }
         }
 
-        // public property for Count
         public int Count
         {
             get
@@ -37,7 +32,6 @@ namespace ClassLibrary
             }
         }
 
-        // public property for ThisSale
         public clsSales ThisSale
         {
             get
@@ -50,7 +44,6 @@ namespace ClassLibrary
             }
         }
 
-        // Add method
         public int Add()
         {
             clsDataConnection DB = new clsDataConnection();
@@ -65,7 +58,6 @@ namespace ClassLibrary
             return DB.Execute("sproc_tblSales_Insert");
         }
 
-        // Update method
         public void Update()
         {
             clsDataConnection DB = new clsDataConnection();
@@ -79,6 +71,15 @@ namespace ClassLibrary
             DB.AddParameter("@IsRefunded", mThisSale.IsRefunded);
 
             DB.Execute("sproc_tblSales_Update");
+        }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@SaleID", mThisSale.SaleID);
+
+            DB.Execute("sproc_tblSales_Delete");
         }
     }
 }
