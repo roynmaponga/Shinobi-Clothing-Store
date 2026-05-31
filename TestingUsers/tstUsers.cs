@@ -168,7 +168,7 @@ namespace TestingUsers
                                 "Password123",
                                 DateTime.Now.Date.ToString());
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -186,7 +186,7 @@ namespace TestingUsers
                                 "Password123",
                                 DateTime.Now.Date.ToString());
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
         }
 
         [TestMethod]
@@ -204,7 +204,7 @@ namespace TestingUsers
                                 "Password123",
                                 DateTime.Now.Date.ToString());
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -224,7 +224,7 @@ namespace TestingUsers
                                 "Password123",
                                 DateTime.Now.Date.ToString());
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -244,7 +244,7 @@ namespace TestingUsers
                                 "Password123",
                                 DateTime.Now.Date.ToString());
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
         }
 
         //GOOD TEST DATA
@@ -270,7 +270,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
         }
 
         [TestMethod]
@@ -284,7 +284,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -298,7 +298,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -314,7 +314,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -330,7 +330,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
         }
 
 
@@ -349,7 +349,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
         }
 
         [TestMethod]
@@ -363,7 +363,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -377,7 +377,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -393,7 +393,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -409,7 +409,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
         }
 
 
@@ -428,7 +428,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
         }
 
         [TestMethod]
@@ -442,7 +442,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -456,7 +456,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -472,7 +472,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -488,7 +488,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
         }
 
 
@@ -513,7 +513,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
         }
 
         [TestMethod]
@@ -533,7 +533,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
         }
 
         [TestMethod]
@@ -551,7 +551,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -571,7 +571,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
@@ -591,7 +591,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
         }
 
         [TestMethod]
@@ -605,7 +605,7 @@ namespace TestingUsers
 
             Error = AUser.Valid(FirstName, LastName, Email, PasswordHash, CreatedAt);
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
         }
     }
 }

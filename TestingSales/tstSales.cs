@@ -480,7 +480,7 @@ namespace TestingSales
 
 
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
 
         }
 
@@ -518,7 +518,7 @@ namespace TestingSales
 
 
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
 
         }
 
@@ -552,7 +552,7 @@ namespace TestingSales
 
 
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
 
         }
 
@@ -584,7 +584,7 @@ namespace TestingSales
 
 
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
 
         }
 
@@ -618,7 +618,7 @@ namespace TestingSales
 
 
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
 
         }
 
@@ -652,7 +652,7 @@ namespace TestingSales
 
 
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
 
         }
 
@@ -678,7 +678,7 @@ namespace TestingSales
 
 
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
 
         }
 
@@ -708,7 +708,7 @@ namespace TestingSales
 
 
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
 
         }
 
@@ -734,7 +734,7 @@ namespace TestingSales
 
 
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
 
         }
 
@@ -760,7 +760,7 @@ namespace TestingSales
 
 
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
 
         }
 
@@ -786,7 +786,7 @@ namespace TestingSales
 
 
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreEqual("", Error);
 
         }
 
@@ -816,7 +816,7 @@ namespace TestingSales
 
 
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreEqual("", Error);
 
         }
 
@@ -842,7 +842,7 @@ namespace TestingSales
 
 
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
 
         }
 
@@ -870,7 +870,7 @@ namespace TestingSales
 
 
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
 
         }
 
@@ -898,7 +898,7 @@ namespace TestingSales
 
 
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
 
         }
 
@@ -926,7 +926,7 @@ namespace TestingSales
 
 
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
 
         }
 
@@ -956,7 +956,7 @@ namespace TestingSales
 
 
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
 
         }
 
@@ -982,7 +982,7 @@ namespace TestingSales
 
 
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
 
         }
 
@@ -1010,7 +1010,7 @@ namespace TestingSales
 
 
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
 
         }
 
@@ -1038,7 +1038,7 @@ namespace TestingSales
 
 
 
-            Assert.AreNotEqual(Error, "");
+            Assert.AreNotEqual("", Error);
 
         }
 
@@ -1066,7 +1066,7 @@ namespace TestingSales
 
 
 
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
 
         }
 
