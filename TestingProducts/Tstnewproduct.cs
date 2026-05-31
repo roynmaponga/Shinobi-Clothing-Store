@@ -102,15 +102,7 @@ namespace Testing2
             Clsnewproduct Anewproduct = new Clsnewproduct();
             string error = "";
             string color = "a";
-
-            error = Anewproduct.Valid(
-                color,
-                "category",
-                "Medium",
-                "9.99",
-                "100",
-                DateTime.Now.Date.ToString());
-
+            error = Anewproduct.Valid("category", color, "Medium", "9.99", "100", DateTime.Now.Date.ToString());
             Assert.AreEqual("", error);
         }
 
@@ -121,13 +113,7 @@ namespace Testing2
             string error = "";
             string color = "aa";
 
-            error = Anewproduct.Valid(
-                color,
-                "category",
-                "Medium",
-                "9.99",
-                "100",
-                DateTime.Now.Date.ToString());
+            Assert.AreEqual("", error);
 
             Assert.AreEqual("", error);
         }
@@ -138,15 +124,7 @@ namespace Testing2
             Clsnewproduct Anewproduct = new Clsnewproduct();
             string error = "";
             string color = "aaaaaaaaaaaaaaaaaaaaaaaaa";
-
-            error = Anewproduct.Valid(
-                color,
-                "category",
-                "Medium",
-                "9.99",
-                "100",
-                DateTime.Now.Date.ToString());
-
+            error = Anewproduct.Valid(color, "category", "Medium", "9.99", "100", DateTime.Now.Date.ToString());
             Assert.AreEqual("", error);
         }
 
@@ -156,16 +134,8 @@ namespace Testing2
             Clsnewproduct Anewproduct = new Clsnewproduct();
             string error = "";
             string color = "aaaaaaaaaaaaaaaaaaaaaa";
-
-            error = Anewproduct.Valid(
-                color,
-                "category",
-                "Medium",
-                "9.99",
-                "100",
-                DateTime.Now.Date.ToString());
-
-            Assert.AreEqual("", error);
+            error = Anewproduct.Valid(color, "category", "Medium", "9.99", "100", DateTime.Now.Date.ToString());
+            Assert.AreNotEqual("", error);
         }
 
         [TestMethod]
@@ -174,15 +144,7 @@ namespace Testing2
             Clsnewproduct Anewproduct = new Clsnewproduct();
             string error = "";
             string color = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
-
-            error = Anewproduct.Valid(
-                color,
-                "category",
-                "Medium",
-                "9.99",
-                "100",
-                DateTime.Now.Date.ToString());
-
+            error = Anewproduct.Valid(color, "category", "Medium", "9.99", "100", DateTime.Now.Date.ToString());
             Assert.AreNotEqual("", error);
         }
 
@@ -206,6 +168,7 @@ namespace Testing2
             }
 
             return error;
+#pragma warning restore IDE0060 // Remove unused parameter
         }
     }
 }

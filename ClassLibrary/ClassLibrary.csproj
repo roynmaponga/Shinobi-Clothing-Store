@@ -113,6 +113,7 @@
   <ItemGroup>
     <Compile Include="clsDataConnection.cs" />
     <Compile Include="Clsnewproduct.cs" />
+    <Compile Include="clsOrdersCollection.cs" />
     <Compile Include="clsproduct.cs" />
     <Compile Include="clsOrders.cs" />
     <Compile Include="clsSales.cs" />
