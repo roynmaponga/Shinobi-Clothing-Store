@@ -9,6 +9,48 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 UserID;
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Session["UserID"] != null)
+            {
+                UserID = Convert.ToInt32(Session["UserID"]);
+
+                DisplayUsers();
+            }
+        }
+    }
+    
+    protected void DisplayUsers()
+    {
+        ClsUsers AUser = new ClsUsers();
+
+        Boolean Found = false;
+
+        Found = AUser.Find(Convert.ToInt32(Session["UserID"]));
+
+        if (Found == true)
+        {
+            txtUserID.Text = AUser.UserID.ToString();
+
+            txtFirstName.Text = AUser.FirstName;
+
+            txtLastName.Text = AUser.LastName;
+
+            txtEmail.Text = AUser.Email;
+
+            txtPasswordHash.Text = AUser.PasswordHash;
+
+            txtCreatedAt.Text = AUser.CreatedAt.ToShortDateString();
+
+            chkIsActive.Checked = AUser.IsActive;
+        }
+    }
+
+
     protected void BtnOK_Click(object sender, EventArgs e)
     {
         //create instance
@@ -42,16 +84,35 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AUser.CreatedAt = Convert.ToDateTime(CreatedAt);
             AUser.IsActive = chkIsActive.Checked;
 
-            //store in session
-            Session["FirstName"] = AUser.FirstName;
-            Session["LastName"] = AUser.LastName;
-            Session["Email"] = AUser.Email;
-            Session["PasswordHash"] = AUser.PasswordHash;
-            Session["CreatedAt"] = AUser.CreatedAt;
-            Session["IsActive"] = AUser.IsActive;
 
-            //redirect
-            Response.Redirect("UsersViewer.aspx");
+
+            try
+            {
+                ClsUsersCollection UserList = new ClsUsersCollection();
+
+                if (Session["UserID"] == null)
+                {
+                    UserList.ThisUser = AUser;
+
+                    UserList.Add();
+                }
+                else
+                {
+                    AUser.UserID = Convert.ToInt32(Session["UserID"]);
+
+                    UserList.ThisUser = AUser;
+
+                    UserList.Update();
+
+                    Session["UserID"] = null;
+                }
+
+                Response.Redirect("UsersList.aspx");
+            }
+            catch
+            {
+                lblError.Text = "Email already exists. Please use a unique email address.";
+            }
         }
         else
         {

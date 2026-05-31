@@ -115,5 +115,119 @@ namespace TestingUsers
 
             Assert.AreNotEqual(5,PrimaryKey);
         }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            ClsUsersCollection AllUsers = new ClsUsersCollection();
+
+            ClsUsers TestItem = new ClsUsers();
+
+            Int32 PrimaryKey = 0;
+
+            TestItem.FirstName = "Roy";
+            TestItem.LastName = "Maponga";
+            TestItem.Email = Guid.NewGuid().ToString() + "@test.com";
+            TestItem.PasswordHash = "Password123";
+            TestItem.CreatedAt = DateTime.Now.Date;
+            TestItem.IsActive = true;
+
+            AllUsers.ThisUser = TestItem;
+
+            PrimaryKey = AllUsers.Add();
+
+            TestItem.UserID = PrimaryKey;
+
+            TestItem.FirstName = "Updated";
+            TestItem.LastName = "User";
+            TestItem.Email = Guid.NewGuid().ToString() + "@test.com";
+            TestItem.PasswordHash = "UpdatedPassword";
+            TestItem.CreatedAt = DateTime.Now.Date;
+            TestItem.IsActive = false;
+
+            AllUsers.ThisUser = TestItem;
+
+            AllUsers.Update();
+
+            AllUsers.ThisUser.Find(PrimaryKey);
+
+            Assert.AreEqual(AllUsers.ThisUser.FirstName, TestItem.FirstName);
+            Assert.AreEqual(AllUsers.ThisUser.LastName, TestItem.LastName);
+            Assert.AreEqual(AllUsers.ThisUser.Email, TestItem.Email);
+            Assert.AreEqual(AllUsers.ThisUser.PasswordHash, TestItem.PasswordHash);
+            Assert.AreEqual(AllUsers.ThisUser.CreatedAt, TestItem.CreatedAt);
+            Assert.AreEqual(AllUsers.ThisUser.IsActive, TestItem.IsActive);
+        }
+
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            ClsUsersCollection AllUsers = new ClsUsersCollection();
+
+            ClsUsers TestItem = new ClsUsers();
+
+            Int32 PrimaryKey = 0;
+
+            TestItem.FirstName = "Delete";
+            TestItem.LastName = "User";
+            TestItem.Email = Guid.NewGuid().ToString() + "@test.com";
+            TestItem.PasswordHash = "Password123";
+            TestItem.CreatedAt = DateTime.Now.Date;
+            TestItem.IsActive = true;
+
+            AllUsers.ThisUser = TestItem;
+
+            PrimaryKey = AllUsers.Add();
+
+            TestItem.UserID = PrimaryKey;
+
+            AllUsers.ThisUser = TestItem;
+
+            AllUsers.Delete();
+
+            Boolean Found = AllUsers.ThisUser.Find(PrimaryKey);
+
+            Assert.AreEqual(false, Found);
+        }
+
+        [TestMethod]
+        public void ReportByEmailMethodOK()
+        {
+            ClsUsersCollection AllUsers = new ClsUsersCollection();
+
+            ClsUsersCollection FilteredUsers = new ClsUsersCollection();
+
+            FilteredUsers.ReportByEmail("");
+
+            Assert.AreEqual(AllUsers.Count, FilteredUsers.Count);
+        }
+
+        [TestMethod]
+        public void ReportByEmailNoneFound()
+        {
+            ClsUsersCollection FilteredUsers = new ClsUsersCollection();
+
+            FilteredUsers.ReportByEmail("xxxxxxxxxxxx");
+
+            Assert.AreEqual(0, FilteredUsers.Count);
+        }
+
+        [TestMethod]
+        public void ReportByEmailTestDataFound()
+        {
+            ClsUsersCollection FilteredUsers = new ClsUsersCollection();
+
+            Boolean OK = true;
+
+            FilteredUsers.ReportByEmail("roy");
+
+            if (FilteredUsers.Count == 0)
+            {
+                OK = false;
+            }
+
+            Assert.IsTrue(OK);
+        }
     }
 }
