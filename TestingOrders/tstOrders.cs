@@ -253,7 +253,7 @@ namespace Testing4
             string DeliveryAddress = "";
             DeliveryAddress = DeliveryAddress.PadRight(50, 'a'); // boundary check
             Error = AnOrders.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount, DeliveryStatus);
-            Assert.AreEqual(Error, "");
+            Assert.AreEqual("", Error);
         }
 
         [TestMethod]
