@@ -14,6 +14,9 @@ namespace ClassLibrary
         //private member for single object
         ClsUsers mThisUser = new ClsUsers();
 
+        //private member for single object
+        private Int32 mCount;
+
         //constructor
         public ClsUsersCollection()
         {
@@ -44,7 +47,7 @@ namespace ClassLibrary
             }
         }
 
-        public int Count
+        public Int32 Count
         {
             get
             {
@@ -52,7 +55,7 @@ namespace ClassLibrary
             }
             set
             {
-
+                // leave empty
             }
         }
 

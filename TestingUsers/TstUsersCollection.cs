@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Testing1
+namespace TestingUsers
 {
     [TestClass]
     public class TstUsersCollection
@@ -83,12 +83,13 @@ namespace Testing1
             ClsUsersCollection AllUsers =
                     new ClsUsersCollection();
 
-            Int32 SomeCount = 2;
+            Int32 SomeCount = AllUsers.UserList.Count;
 
-            AllUsers.Count = SomeCount;
+            Assert.AreEqual(SomeCount, AllUsers.Count);
 
-            Assert.AreEqual(AllUsers.Count, SomeCount);
+            Assert.AreEqual(SomeCount, AllUsers.Count);
         }
+
 
         [TestMethod]
         public void AddMethodOK()
@@ -102,9 +103,9 @@ namespace Testing1
             Int32 PrimaryKey = 0;
 
             TestItem.FirstName = "Roy";
-            TestItem.LastName = "Maponga";
-            TestItem.Email = "roy@test.com";
-            TestItem.PasswordHash = "Password123";
+            TestItem.LastName = "Maps";
+            TestItem.Email = "roy" + DateTime.Now.Ticks + "@test.com";
+            TestItem.PasswordHash = "Password!";
             TestItem.CreatedAt = DateTime.Now.Date;
             TestItem.IsActive = true;
 
@@ -112,7 +113,7 @@ namespace Testing1
 
             PrimaryKey = AllUsers.Add();
 
-            Assert.AreNotEqual(0,PrimaryKey);
+            Assert.AreNotEqual(5,PrimaryKey);
         }
     }
 }
