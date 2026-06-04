@@ -77,6 +77,7 @@ namespace ClassLibrary
             }
         }
         
+        
 
         // private data member for the List
         private List<clsOrders> mOrdersList = new List<clsOrders>();
@@ -177,6 +178,13 @@ namespace ClassLibrary
         {
             
         }
+        public void ReportByOrderStatusNoneFound(string Orderstatus)
+        {
+            clsDataConnection DB = new clsDataConnection();
+                DB.AddParameter("@OrderStatus", Orderstatus);
+                DB.Execute("sproc_tblOrders_FilterByOrderStatus");
+        }
+
     }
     
 }
