@@ -26,11 +26,14 @@ public partial class _1_ConfirmDelete : System.Web.UI.Page
 
         // delete the record
         OrderBook.Delete();
+
+        // redirect back to the main page
+        Response.Redirect("OrdersList.aspx");
     }
 
     protected void btnNo_Click(object sender, EventArgs e)
     {
-        redirect back to the main page
+       // redirect back to the main page
     Response.Redirect("OrdersList.aspx");
     }
 }

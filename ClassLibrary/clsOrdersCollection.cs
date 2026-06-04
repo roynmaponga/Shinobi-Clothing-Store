@@ -159,7 +159,12 @@ namespace ClassLibrary
 
         public void Delete()
         {
-            throw new NotImplementedException();
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // make sure this parameter uses mThisOrder (or whatever your private field is named)
+            DB.AddParameter("@OrderID", mThisOrder.OrderID);
+            // execute the stored procedure
+            DB.Execute("sproc_tblOrders_Delete");
         }
     }
     

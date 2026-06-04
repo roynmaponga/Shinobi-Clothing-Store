@@ -16,6 +16,9 @@ public partial class _1_List : System.Web.UI.Page
             DisplayOrders();
         }
     }
+
+
+
     void DisplayOrders()
     {
         // create an instance of the Orders collection
@@ -28,7 +31,7 @@ public partial class _1_List : System.Web.UI.Page
         lstOrdersList.DataValueField = "OrderID";
 
         // set the data field to display in the list box
-        lstOrdersList.DataTextField = "OrderStatus";
+        lstOrdersList.DataTextField = "DeliveryAddress";
 
         // bind the data to the list
         lstOrdersList.DataBind();
