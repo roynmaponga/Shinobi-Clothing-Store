@@ -1,19 +1,52 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
 using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    // variable to store the primary key with page level scope
+    Int32 OrderID;
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        // get the number of the order to be processed
+        OrderID = Convert.ToInt32(Session["OrderID"]);
+        if (IsPostBack == false)
+        {
+            // if this is not a new record
+            if (OrderID != -1)
+            {
+                // display the current data for the record
+                DisplayOrder();
+            }
+        }
     }
+        void DisplayOrder()
+        {
+            // create an instance of the order book
+            clsOrdersCollection OrderBook = new clsOrdersCollection();
+
+            // find the record to update
+            OrderBook.ThisOrder.Find(OrderID);
+
+            // display the data for the record
+            txtOrderID.Text = OrderBook.ThisOrder.OrderID.ToString();
+            txtUserID.Text = OrderBook.ThisOrder.UserID.ToString();
+            txtOrderDate.Text = OrderBook.ThisOrder.OrderDate.ToString();
+            ddlDeliveryStatus.SelectedValue = OrderBook.ThisOrder.OrderStatus;
+            txtDeliveryAddress.Text = OrderBook.ThisOrder.DeliveryAddress;
+            txtTotalAmount.Text = OrderBook.ThisOrder.TotalAmount.ToString();
+            chkPaid.Checked = OrderBook.ThisOrder.IsPaid;
+        }
+
+    
 
     protected void TextBox3_TextChanged(object sender, EventArgs e)
     {
@@ -45,49 +78,60 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a new instances of clsOrder
         clsOrders AnOrder = new clsOrders();
 
-        string OrderID = txtOrderID.Text;
+        
         string UserID = txtUserID.Text;
         String TotalAmount = txtTotalAmount.Text;
         string OrderDate = txtOrderDate.Text;
         string DeliveryStatus = ddlDeliveryStatus.SelectedValue;
+        string DeliveryAddress = txtDeliveryAddress.Text;
         String Error = "";
 
-        Error = AnOrder.Valid(OrderID, UserID, TotalAmount, OrderDate, DeliveryStatus);
-
+        Error = AnOrder.Valid(UserID, OrderDate, DeliveryStatus, DeliveryAddress, TotalAmount);
         if (Error == "")
         {
-
-
-            // capture order id
-            AnOrder.OrderID = Convert.ToInt32(txtOrderID.Text);
-            //capture user id
-            AnOrder.UserID = Convert.ToInt32(txtUserID.Text);
-            // capture total amount
-            AnOrder.TotalAmount = Convert.ToDecimal(txtTotalAmount.Text);
-            // capture order date
-            AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
-            //capture delivery status
-            AnOrder.DeliveryStatus = ddlDeliveryStatus.SelectedValue;
-
-            // apture is paid check box
-
+            // capture the order id // DON'T MISS THIS BIT !!!!!
+            AnOrder.OrderID = OrderID;
+            // capture the user id
+            AnOrder.UserID = Convert.ToInt32(UserID);
+            // capture the order date
+            AnOrder.OrderDate = Convert.ToDateTime(OrderDate);
+            // capture the order status
+            AnOrder.DeliveryStatus = DeliveryStatus;
+            // capture the delivery address
+            AnOrder.DeliveryAddress = DeliveryAddress;
+            // capture the total amount
+            AnOrder.TotalAmount = Convert.ToDecimal(TotalAmount);
+            // capture is paid
             AnOrder.IsPaid = chkPaid.Checked;
 
-            //create new instances of order collection
-            clsOrdersCollection Orderslist = new clsOrdersCollection();
-            //set the thisorder property
-            Orderslist.ThisOrder = AnOrder;
-            //aDD the new lsit
-            Orderslist.Add();
+            // create a new instance of the order collection
+            clsOrdersCollection OrderList = new clsOrdersCollection();
 
-            
+            // if this is a new record i.e. OrderID = -1 then add the data
+            if (OrderID == -1)
+            {
+                // set the ThisOrder property
+                OrderList.ThisOrder = AnOrder;
+                // add the new record
+                OrderList.Add();
+            }
+            // otherwise it must be an update
+            else
+            {
+                // find the record to update
+                OrderList.ThisOrder.Find(OrderID);
+                // set the ThisOrder property
+                OrderList.ThisOrder = AnOrder;
+                // update the record
+                OrderList.Update();
+            }
 
-            //navigate to the view page
+            // redirect back to the list page
             Response.Redirect("OrdersList.aspx");
-
         }
         else
         {
+            // display the error message
             lblerror.Text = Error;
         }
     }
