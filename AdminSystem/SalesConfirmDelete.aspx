@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SalesConfirmDelete.aspx.cs" Inherits="SalesConfirmDelete" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SalesConfirmDelete.aspx.cs" Inherits="SalesConfirmDeletePage" %>
 
 <!DOCTYPE html>
 
@@ -13,7 +13,6 @@
 <body class="bg-light">
     <form id="form1" runat="server">
         <div class="container mt-5">
-
             <div class="card shadow p-4 mx-auto" style="max-width: 550px;">
 
                 <h2 class="text-center text-danger mb-4">Confirm Delete Sale</h2>
@@ -32,7 +31,6 @@
                 <asp:Label ID="lblError" runat="server" CssClass="text-danger text-center"></asp:Label>
 
             </div>
-
         </div>
     </form>
 </body>
