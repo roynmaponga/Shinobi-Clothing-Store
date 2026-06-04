@@ -204,10 +204,11 @@ namespace Testing4
             // set its properties
             TestItem.UserID = 1;
             TestItem.OrderDate = DateTime.Now.Date;
-            TestItem.DeliveryStatus = "Pending";
+            TestItem.OrderStatus = "Pending";
             TestItem.DeliveryAddress = "123 Innovation Way, Leicester";
             TestItem.TotalAmount = 55.75m;
             TestItem.IsPaid = false;
+
 
             // set ThisOrder to the test data
             AllOrders.ThisOrder = TestItem;

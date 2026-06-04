@@ -22,8 +22,8 @@
         <asp:TextBox ID="txtTotalAmount" runat="server" OnTextChanged="TextBox4_TextChanged" style="z-index: 1; left: 158px; top: 134px; position: absolute; width: 129px"></asp:TextBox>
         <p>
             &nbsp;</p>
-        <asp:Label ID="lblDeliverystatus" runat="server" style="z-index: 1; left: 14px; top: 183px; position: absolute; height: 22px" Text="DeliveryStatus" width="72px"></asp:Label>
-        <asp:DropDownList ID="ddlDeliveryStatus" runat="server" style="z-index: 1; left: 157px; top: 179px; position: absolute" width="129px">
+        <asp:Label ID="lblOrderstatus" runat="server" style="z-index: 1; left: 14px; top: 183px; position: absolute; height: 22px; right: 849px;" Text="OrderStatus" width="72px"></asp:Label>
+        <asp:DropDownList ID="ddlOrderstatus" runat="server" style="z-index: 1; left: 157px; top: 179px; position: absolute" width="129px">
             <asp:ListItem>Out for delivery</asp:ListItem>
             <asp:ListItem>In transit</asp:ListItem>
             <asp:ListItem>Delivered</asp:ListItem>

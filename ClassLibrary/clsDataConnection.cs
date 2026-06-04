@@ -152,8 +152,6 @@ public class clsDataConnection
 
     public Int32 Execute(string SProcName)
     {
-        ///public method used to execute the named stored procedure
-        ///accepts one parameter which is the name of the stored procedure to use
         //open the stored procedure
         //initialise the connection to the database
         connectionToDB = new SqlConnection(connectionString);

@@ -40,7 +40,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtOrderID.Text = OrderBook.ThisOrder.OrderID.ToString();
             txtUserID.Text = OrderBook.ThisOrder.UserID.ToString();
             txtOrderDate.Text = OrderBook.ThisOrder.OrderDate.ToString();
-            ddlDeliveryStatus.SelectedValue = OrderBook.ThisOrder.OrderStatus;
+            ddlOrderstatus.SelectedValue = OrderBook.ThisOrder.OrderStatus;
             txtDeliveryAddress.Text = OrderBook.ThisOrder.DeliveryAddress;
             txtTotalAmount.Text = OrderBook.ThisOrder.TotalAmount.ToString();
             chkPaid.Checked = OrderBook.ThisOrder.IsPaid;
@@ -78,15 +78,15 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a new instances of clsOrder
         clsOrders AnOrder = new clsOrders();
 
-        
+        int OrderID = Convert.ToInt32(txtOrderID.Text);
         string UserID = txtUserID.Text;
         String TotalAmount = txtTotalAmount.Text;
         string OrderDate = txtOrderDate.Text;
-        string DeliveryStatus = ddlDeliveryStatus.SelectedValue;
+        string OrderStatus = ddlOrderstatus.SelectedValue;
         string DeliveryAddress = txtDeliveryAddress.Text;
         String Error = "";
 
-        Error = AnOrder.Valid(UserID, OrderDate, DeliveryStatus, DeliveryAddress, TotalAmount);
+        Error = AnOrder.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount);
         if (Error == "")
         {
             // capture the order id // DON'T MISS THIS BIT !!!!!
@@ -96,7 +96,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             // capture the order date
             AnOrder.OrderDate = Convert.ToDateTime(OrderDate);
             // capture the order status
-            AnOrder.DeliveryStatus = DeliveryStatus;
+            AnOrder.OrderStatus = OrderStatus;
             // capture the delivery address
             AnOrder.DeliveryAddress = DeliveryAddress;
             // capture the total amount

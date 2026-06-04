@@ -128,11 +128,14 @@ namespace ClassLibrary
             clsDataConnection DB = new clsDataConnection();
 
             // set the parameters for the stored procedure
+            
             DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
             DB.AddParameter("@DeliveryAddress", mThisOrder.DeliveryAddress);
             DB.AddParameter("@OrderStatus", mThisOrder.OrderStatus);
             DB.AddParameter("@TotalAmount", mThisOrder.TotalAmount);
             DB.AddParameter("@IsPaid", mThisOrder.IsPaid);
+
+           
 
             // execute the query returning the primary key value
             return DB.Execute("sproc_tblOrders_Insert");
@@ -159,7 +162,16 @@ namespace ClassLibrary
 
         public void Delete()
         {
-            throw new NotImplementedException();
+            
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+
+            // set the parameters for the stored procedure
+          
+            DB.AddParameter("@OrderID", mThisOrder.OrderID);
+
+            // execute the stored procedure
+            DB.Execute("sproc_tblOrders_Delete");
         }
     }
     
