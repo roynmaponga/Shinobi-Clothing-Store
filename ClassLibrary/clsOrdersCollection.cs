@@ -77,6 +77,7 @@ namespace ClassLibrary
             }
         }
         
+        
 
         // private data member for the List
         private List<clsOrders> mOrdersList = new List<clsOrders>();
@@ -162,17 +163,28 @@ namespace ClassLibrary
 
         public void Delete()
         {
-            
+
             // connect to the database
             clsDataConnection DB = new clsDataConnection();
 
-            // set the parameters for the stored procedure
-          
+            // CRITICAL: It MUST be the private backing field 'mThisOrder'
             DB.AddParameter("@OrderID", mThisOrder.OrderID);
 
             // execute the stored procedure
             DB.Execute("sproc_tblOrders_Delete");
         }
+
+        public void ReportByOrderStatus(string v)
+        {
+            
+        }
+        public void ReportByOrderStatusNoneFound(string Orderstatus)
+        {
+            clsDataConnection DB = new clsDataConnection();
+                DB.AddParameter("@OrderStatus", Orderstatus);
+                DB.Execute("sproc_tblOrders_FilterByOrderStatus");
+        }
+
     }
     
 }
