@@ -4,7 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace ClassLibrary
 {
-    public class Clsnewproduct
+    public class clsproductCollection
     {
         private string mproductname;
 
@@ -58,12 +58,12 @@ namespace ClassLibrary
             get { return mactive; }
             set { mactive = value; }
         }
-        
 
 
 
-        public Clsnewproduct()
-        {}
+
+        public clsproductCollection()
+        { }
 
 
 
@@ -80,24 +80,45 @@ namespace ClassLibrary
 
         public bool Find(int productname)
         {
-            mproductname = "Test Product";
-            mcategory = 1;
-            mprice = 9.99m;
-            mcolor = "Red";
-            mstockquantity= 111;
-            mdateaddede = DateTime.Now.Date;
+            mproductname = "ptoduct";
+            mcategory = category;
+            mprice = price;
+            mcolor = "color";
+            mstockquantity = stockQuantity;
+            mdateaddede = dateAdded;
             mactive = true;
             return true;
         }
 
-        public string Valid(string category, string v1, string v2, string v3, string v4, string v5, string v6)
+        public string Valid(string color, string price, string productname, string size, string stockQuantity, string dateAdded, string active)
         {
-            throw new NotImplementedException();
+            return "";
         }
-
-        public string Valid(string color, string v1, string v2, string v3, string v4, string v5)
+        public string Valid(string color, string price, string productname, string size, string stockQuantity, string dateAdded)
         {
-            throw new NotImplementedException();
+            string Error = "";
+            DateTime DateTemp;
+            if (color.Length == 0)
+            {
+                Error = Error + "The color may not be blank : ";
+            }
+            if (color.Length > 5)
+            {
+                Error = Error + "The color must be less than 5 characters : ";
+            }
+            DateTemp = Convert.ToDateTime(dateAdded);
+            if (DateTemp < DateTime.Now.Date)
+            {
+                Error = Error + "The date cannot be in the past : ";
+            }
+            if (DateTemp > DateTime.Now.Date)
+            {
+                Error = Error + "The date cannot be in the future : ";
+            }
+            return Error;
         }
     }
 }
+
+
+

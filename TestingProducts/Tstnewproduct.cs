@@ -1,6 +1,8 @@
 ﻿using ClassLibrary;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Drawing;
 
 namespace Testing2
 {
@@ -8,18 +10,25 @@ namespace Testing2
     public class Tstnewproduct
     {
         public string Error { get; private set; }
+        public string size { get; private set; }
+        public string stockQuantity { get; private set; }
+        public string price { get; private set; }
+        public string productname { get; private set; }
+        public string dateAdded { get; private set; }
+        public object active { get; private set; }
+        public string color { get; private set; }
 
         [TestMethod]
         public void InstanceOK()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
+            clsproductCollection Anewproduct = new clsproductCollection();
             Assert.IsNotNull(Anewproduct);
         }
 
         [TestMethod]
         public void ActivePropertyOK()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
+            clsproductCollection Anewproduct = new clsproductCollection();
             Boolean TestData = true;
             Anewproduct.Active = TestData;
 
@@ -29,7 +38,7 @@ namespace Testing2
         [TestMethod]
         public void DateAddedPropertyOK()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
+            clsproductCollection Anewproduct = new clsproductCollection();
             DateTime TestData = DateTime.Now.Date;
             Anewproduct.DateAdded = TestData;
 
@@ -39,7 +48,7 @@ namespace Testing2
         [TestMethod]
         public void ProductnamePropertyOK()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
+            clsproductCollection Anewproduct = new clsproductCollection();
             string TestData = "Test Product";
             Anewproduct.Productname = TestData;
 
@@ -49,7 +58,7 @@ namespace Testing2
         [TestMethod]
         public void CategoryPropertyOK()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
+            clsproductCollection Anewproduct = new clsproductCollection();
             string TestData = "Test Category";
             Anewproduct.Category = TestData;
 
@@ -59,7 +68,7 @@ namespace Testing2
         [TestMethod]
         public void PricePropertyOK()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
+            clsproductCollection Anewproduct = new clsproductCollection();
             decimal TestData = 9.99m;
             Anewproduct.Price = TestData;
 
@@ -69,7 +78,7 @@ namespace Testing2
         [TestMethod]
         public void StockQuantityPropertyOK()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
+            clsproductCollection Anewproduct = new clsproductCollection();
             int TestData = 100;
             Anewproduct.StockQuantity = TestData;
 
@@ -79,7 +88,7 @@ namespace Testing2
         [TestMethod]
         public void ColorPropertyOK()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
+            clsproductCollection Anewproduct = new clsproductCollection();
             string TestData = "Red";
             Anewproduct.Color = TestData;
 
@@ -89,86 +98,157 @@ namespace Testing2
         [TestMethod]
         public void SizePropertyOK()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
+            clsproductCollection Anewproduct = new clsproductCollection();
             string TestData = "Medium";
             Anewproduct.Size = TestData;
 
             Assert.AreEqual(TestData, Anewproduct.Size);
         }
-
         [TestMethod]
-        public void HouseNoMin()
+        public void colorMinLessOne()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
-            string error = "";
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
             string color = "a";
-            error = Anewproduct.Valid("category", color, "Medium", "9.99", "100", DateTime.Now.Date.ToString());
-            Assert.AreEqual("", error);
-        }
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
 
+        }
         [TestMethod]
-        public void HouseNOMinPlusOne()
+        public void colorMin()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
-            string error = "";
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
+            string color = "a";
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
+        }
+        [TestMethod]
+        public void colorMinPlusOne()
+        {
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
             string color = "aa";
-
-            Assert.AreEqual("", error);
-
-            Assert.AreEqual("", error);
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
         }
-
         [TestMethod]
-        public void HouseNoMaxLessOne()
+        public void colorMaxLessOne()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
-            string error = "";
-            string color = "aaaaaaaaaaaaaaaaaaaaaaaaa";
-            error = Anewproduct.Valid(color, "category", "Medium", "9.99", "100", DateTime.Now.Date.ToString());
-            Assert.AreEqual("", error);
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
+            string color = "aaaaa";
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
         }
-
         [TestMethod]
-        public void HouseNoMid()
+        public void colorMax()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
-            string error = "";
-            string color = "aaaaaaaaaaaaaaaaaaaaaa";
-            error = Anewproduct.Valid(color, "category", "Medium", "9.99", "100", DateTime.Now.Date.ToString());
-            Assert.AreNotEqual("", error);
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
+            string color = "aaaaaa";
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
         }
-
         [TestMethod]
-        public void HouseNoPlusOne()
+        public void colormid()
         {
-            Clsnewproduct Anewproduct = new Clsnewproduct();
-            string error = "";
-            string color = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
-            error = Anewproduct.Valid(color, "category", "Medium", "9.99", "100", DateTime.Now.Date.ToString());
-            Assert.AreNotEqual("", error);
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
+            string color = "aaa";
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
         }
-
-        public string Valid(string color,
-                            string category,
-                            string size,
-                            string price,
-                            string stockquantity,
-                            string dateadded)
+        [TestMethod]
+        public void colorMaxPlusOne()
         {
-            string error = "";
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
+            string color = "aaaaa";
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
+        }
+        [TestMethod]
+        public void colorExtremeMax()
+        {
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
+            string color = "";
+            color = color.PadRight(500, 'a');
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
 
-            if (color.Length < 1)
-            {
-                error += "The color may not be blank : ";
-            }
-
-            if (color.Length > 25)
-            {
-                error += "The color must be less than 25 characters : ";
-            }
-
-            return error;
-#pragma warning restore IDE0060 // Remove unused parameter
+        }
+        [TestMethod]
+        public void DateAddedExtremeMin()
+        {
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
+            DateTime TestData;
+            TestData = DateTime.Now.Date;
+            TestData = TestData.AddYears(-100);
+            string dateAdded = TestData.ToString();
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
+        }
+        [TestMethod]
+        public void DateAddedExtremeMin()
+        {
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
+            DateTime TestData;
+            TestData = DateTime.Now.Date;
+            TestData = TestData.AddYears(-100);
+            string dateAdded = TestData.ToString();
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
+        }
+        [TestMethod]
+        public void DateAddedMinLessOne()
+        {
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
+            DateTime TestData;
+            TestData = DateTime.Now.Date;
+            TestData = TestData.AddDays(-1);
+            string dateAdded = TestData.ToString();
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
+        }
+        [TestMethod]
+        public void DateAddedMin()
+        {
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
+            DateTime TestData;
+            TestData = DateTime.Now.Date;
+            string dateAdded = TestData.ToString();
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
+        }
+        [TestMethod]
+        public void DateAddedMinPlusOne()
+        {
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
+            DateTime TestData;
+            TestData = DateTime.Now.Date;
+            TestData = TestData.AddDays(1);
+            string dateAdded = TestData.ToString();
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
+        }
+        [TestMethod]
+        public void DateAddedMax()
+        {
+            clsproductCollection Anewproduct = new clsproductCollection();
+            Error = "";
+            DateTime TestData;
+            TestData = DateTime.Now.Date;
+            TestData = TestData.AddYears(100);
+            string dateAdded = TestData.ToString();
+            Error = Anewproduct.Valid(color, size, stockQuantity, price, productname, dateAdded, (string)active);
+            Assert.AreEqual("", Error);
         }
     }
-}
+    }
