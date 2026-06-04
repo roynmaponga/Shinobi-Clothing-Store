@@ -156,6 +156,11 @@ namespace ClassLibrary
             // execute the stored procedure
             DB.Execute("sproc_tblOrders_Update");
         }
+
+        public void Delete()
+        {
+            throw new NotImplementedException();
+        }
     }
     
 }
