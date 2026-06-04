@@ -1,7 +1,7 @@
 ﻿using System;
 using ClassLibrary;
 
-public partial class SalesConfirmDelete : System.Web.UI.Page
+public partial class SalesDataEntry : System.Web.UI.Page
 {
     Int32 SaleID;
 
@@ -13,23 +13,116 @@ public partial class SalesConfirmDelete : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("SalesList.aspx");
+            SaleID = -1;
+        }
+
+        if (IsPostBack == false)
+        {
+            DisplayUnusedOrderIDs();
+
+            if (SaleID != -1)
+            {
+                DisplaySale();
+            }
         }
     }
 
-    protected void btnYes_Click(object sender, EventArgs e)
+    void DisplayUnusedOrderIDs()
     {
-        clsSalesCollection SalesList = new clsSalesCollection();
+        clsDataConnection DB = new clsDataConnection();
 
-        SalesList.ThisSale.Find(SaleID);
+        DB.Execute("sproc_tblOrders_SelectUnusedOrderIDs");
 
-        SalesList.Delete();
+        ddlOrderID.DataSource = DB.DataTable;
+        ddlOrderID.DataValueField = "OrderID";
+        ddlOrderID.DataTextField = "OrderID";
+        ddlOrderID.DataBind();
+    }
 
+    void DisplaySale()
+    {
+        clsSalesCollection AllSales = new clsSalesCollection();
+
+        AllSales.ThisSale.Find(SaleID);
+
+        txtSaleID.Text = AllSales.ThisSale.SaleID.ToString();
+
+        ddlOrderID.Items.Insert(0, AllSales.ThisSale.OrderID.ToString());
+        ddlOrderID.SelectedValue = AllSales.ThisSale.OrderID.ToString();
+
+        txtSaleDate.Text = AllSales.ThisSale.SaleDate.ToShortDateString();
+        txtTotalAmount.Text = AllSales.ThisSale.TotalAmount.ToString();
+        txtPaymentMethod.Text = AllSales.ThisSale.PaymentMethod;
+        txtSaleStatus.Text = AllSales.ThisSale.SaleStatus;
+        chkIsRefunded.Checked = AllSales.ThisSale.IsRefunded;
+    }
+
+    protected void btnOK_Click(object sender, EventArgs e)
+    {
+        clsSales ASale = new clsSales();
+
+        string SaleIDText = txtSaleID.Text;
+        string OrderID = ddlOrderID.SelectedValue;
+        string SaleDate = txtSaleDate.Text;
+        string TotalAmount = txtTotalAmount.Text;
+        string PaymentMethod = txtPaymentMethod.Text;
+        string SaleStatus = txtSaleStatus.Text;
+        string IsRefunded = chkIsRefunded.Checked.ToString();
+
+        if (SaleID == -1)
+        {
+            SaleIDText = "0";
+        }
+
+        string Error = "";
+
+        Error = ASale.Valid(SaleIDText, OrderID, SaleDate, TotalAmount, PaymentMethod, SaleStatus, IsRefunded);
+
+        if (Error == "")
+        {
+            ASale.OrderID = Convert.ToInt32(OrderID);
+            ASale.SaleDate = Convert.ToDateTime(SaleDate);
+            ASale.TotalAmount = Convert.ToDecimal(TotalAmount);
+            ASale.PaymentMethod = PaymentMethod;
+            ASale.SaleStatus = SaleStatus;
+            ASale.IsRefunded = chkIsRefunded.Checked;
+
+            clsSalesCollection SalesList = new clsSalesCollection();
+
+            if (SaleID == -1)
+            {
+                SalesList.ThisSale = ASale;
+
+                Int32 NewSaleID = SalesList.Add();
+
+                Session["SaleID"] = NewSaleID;
+            }
+            else
+            {
+                ASale.SaleID = SaleID;
+
+                SalesList.ThisSale = ASale;
+
+                SalesList.Update();
+
+                Session["SaleID"] = SaleID;
+            }
+
+            Response.Redirect("SalesViewer.aspx");
+        }
+        else
+        {
+            lblError.Text = Error;
+        }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
         Response.Redirect("SalesList.aspx");
     }
 
-    protected void btnNo_Click(object sender, EventArgs e)
+    protected void btnReturn_Click(object sender, EventArgs e)
     {
-        Response.Redirect("SalesList.aspx");
+        Response.Redirect("TeamMainMenu.aspx");
     }
 }
