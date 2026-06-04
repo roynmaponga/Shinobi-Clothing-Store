@@ -162,16 +162,20 @@ namespace ClassLibrary
 
         public void Delete()
         {
-            
+
             // connect to the database
             clsDataConnection DB = new clsDataConnection();
 
-            // set the parameters for the stored procedure
-          
+            // CRITICAL: It MUST be the private backing field 'mThisOrder'
             DB.AddParameter("@OrderID", mThisOrder.OrderID);
 
             // execute the stored procedure
             DB.Execute("sproc_tblOrders_Delete");
+        }
+
+        public void ReportByOrderStatus(string v)
+        {
+            
         }
     }
     

@@ -231,5 +231,33 @@ namespace Testing4
             // test to see that the record was not found
             Assert.IsFalse(Found);
         }
+        [TestMethod]
+        public void ReportByOrderStatusMethodOK()
+        {
+            // create an instance of the class containing unfiltered results
+            clsOrdersCollection AllOrders = new clsOrdersCollection();
+
+            // create an instance of the filtered data
+            clsOrdersCollection FilteredOrders = new clsOrdersCollection();
+
+            // apply a blank string (should return all records)
+            FilteredOrders.ReportByOrderStatus("");
+
+            // test to see that the two values are the same
+            Assert.AreEqual(AllOrders.Count, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByOrderStatusNoneFound()
+        {
+            // create an instance of the class we want to create
+            clsOrdersCollection FilteredOrders = new clsOrdersCollection();
+
+            // apply an order status that doesn't exist
+            FilteredOrders.ReportByOrderStatus("InvalidStatus");
+
+            // test to see that there are no records found
+            Assert.AreEqual(0, FilteredOrders.Count);
+        }
     }
 }
