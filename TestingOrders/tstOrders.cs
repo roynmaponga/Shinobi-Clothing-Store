@@ -212,9 +212,7 @@ namespace Testing4
             clsOrders AnOrders = new clsOrders();
             // string variable to store any error message
             String Error = "";
-            // invoke the method
             Error = AnOrders.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount, DeliveryStatus);
-            // test to see that the result is correct
             Assert.AreEqual("", Error);
         }
 
