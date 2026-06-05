@@ -135,4 +135,28 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblerror.Text = Error;
         }
     }
+
+    protected void btmFind_Click(object sender, EventArgs e)
+    {
+        // create an instance of the order class
+        clsOrders AnOrder = new clsOrders();
+        //create a variable to store the primary key
+        Int32 OrderID;
+        //create a variable to store the result of the find operation
+        Boolean Found = false;
+        //get the primary key entered by the user
+        OrderID = Convert.ToInt32(txtOrderID.Text);
+        //find the record
+        Found = AnOrder.Find(OrderID);
+        //if found
+        if (Found == true)
+        {
+            //display the values of the properties in the form
+            txtOrderDate.Text = AnOrder.OrderDate.ToString();
+            ddlOrderstatus.SelectedValue = AnOrder.OrderStatus;
+            txtDeliveryAddress.Text = AnOrder.DeliveryAddress;
+            txtTotalAmount.Text = AnOrder.TotalAmount.ToString();
+            chkPaid.Checked = AnOrder.IsPaid;
+        }
+    }
 }
