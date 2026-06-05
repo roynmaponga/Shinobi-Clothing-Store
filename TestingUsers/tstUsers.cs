@@ -607,5 +607,339 @@ namespace TestingUsers
 
             Assert.AreNotEqual("", Error);
         }
+
+        [TestMethod]
+        public void TestLastNameFound()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            Boolean OK = true;
+
+            AUser.Find(3);
+
+            if (AUser.LastName != "Maponga")
+            {
+                OK = false;
+            }
+
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestEmailFound()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            AUser.Find(3);
+
+            Assert.AreEqual(
+                 "roymaponga@email.com",
+                AUser.Email);
+        }
+        
+
+        [TestMethod]
+        public void TestPasswordFound()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            Boolean OK = true;
+
+            AUser.Find(3);
+
+            if (AUser.PasswordHash != "Mapongaroy")
+            {
+                OK = false;
+            }
+
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestCreatedAtFound()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            Boolean OK = true;
+
+            AUser.Find(3);
+
+            if (AUser.CreatedAt == DateTime.MinValue)
+            {
+                OK = false;
+            }
+
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestIsActiveFound()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            Boolean OK = true;
+
+            AUser.Find(3);
+
+            if (AUser.IsActive != true)
+            {
+                OK = false;
+            }
+
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void FirstNameMinPlusOne()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            String Error;
+
+            Error = AUser.Valid(
+                "RR",
+                LastName,
+                Email,
+                PasswordHash,
+                CreatedAt);
+
+            Assert.AreEqual("", Error);
+        }
+
+        [TestMethod]
+        public void FirstNameMid()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            String Error;
+
+            Error = AUser.Valid(
+                "Roy",
+                LastName,
+                Email,
+                PasswordHash,
+                CreatedAt);
+
+            Assert.AreEqual("", Error);
+        }
+
+        [TestMethod]
+        public void FirstNameMaxLessOne()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            string TestData = "".PadRight(49, 'A');
+
+            String Error = AUser.Valid(
+                TestData,
+                LastName,
+                Email,
+                PasswordHash,
+                CreatedAt);
+
+            Assert.AreEqual("", Error);
+        }
+
+        [TestMethod]
+        public void FirstNameExtremeMax()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            string TestData = "".PadRight(500, 'A');
+
+            String Error = AUser.Valid(
+                TestData,
+                LastName,
+                Email,
+                PasswordHash,
+                CreatedAt);
+
+            Assert.AreNotEqual("", Error);
+        }
+
+        [TestMethod]
+        public void LastNameMinPlusOne()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            String Error = AUser.Valid(
+                FirstName,
+                "RR",
+                Email,
+                PasswordHash,
+                CreatedAt);
+
+            Assert.AreEqual("", Error);
+        }
+
+        [TestMethod]
+        public void LastNameMaxLessOne()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            string TestData = "".PadRight(49, 'A');
+
+            String Error = AUser.Valid(
+                FirstName,
+                TestData,
+                Email,
+                PasswordHash,
+                CreatedAt);
+
+            Assert.AreEqual("", Error);
+        }
+
+        [TestMethod]
+        public void LastNameExtremeMax()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            string TestData = "".PadRight(500, 'A');
+
+            String Error = AUser.Valid(
+                FirstName,
+                TestData,
+                Email,
+                PasswordHash,
+                CreatedAt);
+
+            Assert.AreNotEqual("", Error);
+        }
+
+        [TestMethod]
+        public void EmailMinPlusOne()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            String Error = AUser.Valid(
+                FirstName,
+                LastName,
+                "ab",
+                PasswordHash,
+                CreatedAt);
+
+            Assert.AreEqual("", Error);
+        }
+
+        [TestMethod]
+        public void EmailMaxLessOne()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            string TestData = "".PadRight(99, 'A');
+
+            String Error = AUser.Valid(
+                FirstName,
+                LastName,
+                TestData,
+                PasswordHash,
+                CreatedAt);
+
+            Assert.AreEqual("", Error);
+        }
+
+        [TestMethod]
+        public void EmailExtremeMax()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            string TestData = "".PadRight(500, 'A');
+
+            String Error = AUser.Valid(
+                FirstName,
+                LastName,
+                TestData,
+                PasswordHash,
+                CreatedAt);
+
+            Assert.AreNotEqual("", Error);
+        }
+
+        [TestMethod]
+        public void PasswordMinPlusOne()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            String Error = AUser.Valid(
+                FirstName,
+                LastName,
+                Email,
+                "AB",
+                CreatedAt);
+
+            Assert.AreEqual("", Error);
+        }
+
+        [TestMethod]
+        public void PasswordMaxLessOne()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            string TestData = "".PadRight(254, 'A');
+
+            String Error = AUser.Valid(
+                FirstName,
+                LastName,
+                Email,
+                TestData,
+                CreatedAt);
+
+            Assert.AreEqual("", Error);
+        }
+
+        [TestMethod]
+        public void PasswordExtremeMax()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            string TestData = "".PadRight(500, 'A');
+
+            String Error = AUser.Valid(
+                FirstName,
+                LastName,
+                Email,
+                TestData,
+                CreatedAt);
+
+            Assert.AreNotEqual("", Error);
+        }
+
+
+        [TestMethod]
+        public void CreatedAtMid()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            String Error;
+
+            DateTime TestDate = DateTime.Now.Date;
+
+            Error = AUser.Valid(
+                FirstName,
+                LastName,
+                Email,
+                PasswordHash,
+                TestDate.ToString());
+
+            Assert.AreEqual("", Error);
+        }
+
+        [TestMethod]
+        public void CreatedAtMaxPlusOne()
+        {
+            ClsUsers AUser = new ClsUsers();
+
+            DateTime TestDate =
+                DateTime.Now.Date.AddDays(2);
+
+            String Error = AUser.Valid(
+                FirstName,
+                LastName,
+                Email,
+                PasswordHash,
+                TestDate.ToString());
+
+            Assert.AreNotEqual("", Error);
+        }
     }
 }

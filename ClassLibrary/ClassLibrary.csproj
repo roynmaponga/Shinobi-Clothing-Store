@@ -225,12 +225,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsDataConnection.cs" />
+    <Compile Include="clsOrderUser.cs" />
+    <Compile Include="clsproductCollection.cs" />
+    <Compile Include="clsOrdersCollection.cs" />
     <Compile Include="clsproduct.cs" />
     <Compile Include="clsOrdersCollection.cs" />
     <Compile Include="clsOrders.cs" />
     <Compile Include="clsproductCollection.cs" />
     <Compile Include="clsSales.cs" />
     <Compile Include="clsSalesCollection.cs" />
+    <Compile Include="ClsUserLogin.cs" />
     <Compile Include="ClsUsers.cs" />
     <Compile Include="ClsUsersCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

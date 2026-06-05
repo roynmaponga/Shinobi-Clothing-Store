@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Contexts;
 
 namespace ClassLibrary
 {
@@ -32,7 +33,7 @@ namespace ClassLibrary
                 // Create a blank order object
                 clsOrders AnOrder = new clsOrders();
 
-                // Read in the fields for the current record safely checking for DBNull
+              
 
                 // OrderID (Primary Key - usually never null, but kept safe)
                 AnOrder.OrderID = Convert.IsDBNull(DB.DataTable.Rows[Index]["OrderID"])
@@ -76,6 +77,42 @@ namespace ClassLibrary
                 Index++;
             }
         }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            // Variable to store the loop index pointer
+            Int32 Index = 0;
+            // Variable to store the total number of records returned from the database
+            Int32 RecordCount = 0;
+            // Get the total number of rows from the data connection object
+            RecordCount = DB.Count;
+            // Clear the current private list collection to ensure a clean slate
+            mOrdersList = new List<clsOrders>();
+
+            // Loop through each record until the end of the database table selection
+            while (Index < RecordCount)
+            {
+                // Create a blank instance of the core order class object
+                clsOrders AnOrder = new clsOrders();
+
+                // Copy the data from the current database row fields into our C# object properties
+                AnOrder.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
+                // Explicitly handling the newly added UserID column mapping
+                AnOrder.UserID = DB.DataTable.Rows[Index]["UserID"] != DBNull.Value ? Convert.ToInt32(DB.DataTable.Rows[Index]["UserID"]) : 0;
+                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
+                AnOrder.OrderStatus = Convert.ToString(DB.DataTable.Rows[Index]["OrderStatus"]);
+                AnOrder.DeliveryAddress = Convert.ToString(DB.DataTable.Rows[Index]["DeliveryAddress"]);
+                AnOrder.TotalAmount = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalAmount"]);
+                AnOrder.IsPaid = Convert.ToBoolean(DB.DataTable.Rows[Index]["IsPaid"]);
+
+                // Add the fully populated item to our private collection list array
+                mOrdersList.Add(AnOrder);
+
+                // Increment the index pointer to move to the next database row record
+                Index++;
+            }
+        }
+
 
 
 
@@ -179,10 +216,19 @@ namespace ClassLibrary
 
         }
         public void ReportByOrderStatusNoneFound(string Orderstatus)
+        public void ReportByOrderStatus(string OrderStatus)
         {
+            // connect to the database
             clsDataConnection DB = new clsDataConnection();
             DB.AddParameter("@OrderStatus", Orderstatus);
             DB.Execute("sproc_tblOrders_FilterByOrderStatus");
+            // send the OrderStatus parameter to the stored procedure
+            DB.AddParameter("@OrderStatus", OrderStatus);
+            // execute the filter stored procedure
+            DB.Execute("sproc_tblOrders_FilterByOrderStatus");
+            // populate the internal collection list with the filtered database table records
+            PopulateArray(DB);
+
         }
         public ClsproductCollection()
         { clsDataConnection DB = new clsDataConnection();
@@ -216,3 +262,10 @@ namespace ClassLibrary
     }
 
 
+
+
+    }
+
+    }
+    
+}

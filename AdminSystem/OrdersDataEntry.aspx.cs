@@ -89,7 +89,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Error = AnOrder.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount);
         if (Error == "")
         {
-            // capture the order id // DON'T MISS THIS BIT !!!!!
+            // capture the order id
             AnOrder.OrderID = OrderID;
             // capture the user id
             AnOrder.UserID = Convert.ToInt32(UserID);
@@ -107,7 +107,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             // create a new instance of the order collection
             clsOrdersCollection OrderList = new clsOrdersCollection();
 
-            // if this is a new record i.e. OrderID = -1 then add the data
+            // if this is a new record 
             if (OrderID == -1)
             {
                 // set the ThisOrder property
@@ -134,5 +134,34 @@ public partial class _1_DataEntry : System.Web.UI.Page
             // display the error message
             lblerror.Text = Error;
         }
+    }
+
+    protected void btmFind_Click(object sender, EventArgs e)
+    {
+        // create an instance of the order class
+        clsOrders AnOrder = new clsOrders();
+        //create a variable to store the primary key
+        Int32 OrderID;
+        //create a variable to store the result of the find operation
+        Boolean Found = false;
+        //get the primary key entered by the user
+        OrderID = Convert.ToInt32(txtOrderID.Text);
+        //find the record
+        Found = AnOrder.Find(OrderID);
+        //if found
+        if (Found == true)
+        {
+            //display the values of the properties in the form
+            txtOrderDate.Text = AnOrder.OrderDate.ToString();
+            ddlOrderstatus.SelectedValue = AnOrder.OrderStatus;
+            txtDeliveryAddress.Text = AnOrder.DeliveryAddress;
+            txtTotalAmount.Text = AnOrder.TotalAmount.ToString();
+            chkPaid.Checked = AnOrder.IsPaid;
+        }
+    }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
     }
 }

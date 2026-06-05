@@ -10,9 +10,23 @@ public partial class _1_List : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        if (Session["UserID"] == null)
+        {
+            Response.Redirect("UsersLogin.aspx");
+        }
+
         if (!IsPostBack)
         {
             DisplayUsers();
+
+            if (Session["DeleteMessage"] != null)
+            {
+                lblMessage.Text =
+                    Session["DeleteMessage"].ToString();
+
+                Session["DeleteMessage"] = null;
+            }
         }
     }
 
@@ -69,6 +83,35 @@ public partial class _1_List : System.Web.UI.Page
         }
     }
 
+    protected void BtnApplyFilter_Click(object sender, EventArgs e)
+    {
+        ClsUsersCollection Users = new ClsUsersCollection();
 
+        Users.ReportByEmail(txtFilterEmail.Text);
 
+        lstUsers.DataSource = Users.UserList;
+
+        lstUsers.DataValueField = "UserID";
+
+        lstUsers.DataTextField = "Email";
+
+        lstUsers.DataBind();
+    }
+
+    protected void BtnClearFilter_Click(object sender, EventArgs e)
+    {
+        txtFilterEmail.Text = "";
+
+        DisplayUsers();
+    }
+
+        protected void lnkLogo_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
+    }
+
+         protected void imgLogo_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
+    }
 }

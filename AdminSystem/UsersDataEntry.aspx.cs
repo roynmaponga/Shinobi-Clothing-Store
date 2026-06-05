@@ -13,6 +13,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["UserID"] == null)
+        {
+            Response.Redirect("UsersLogin.aspx");
+        }
         if (!IsPostBack)
         {
             if (Session["UserID"] != null)
@@ -23,7 +27,12 @@ public partial class _1_DataEntry : System.Web.UI.Page
             }
         }
     }
-    
+
+    protected void imgLogo_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
+    }
+
     protected void DisplayUsers()
     {
         ClsUsers AUser = new ClsUsers();
@@ -134,6 +143,13 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         Boolean Found = false;
 
+        if (txtUserID.Text == "")
+        {
+            lblError.Text = "Please enter details";
+
+            return;
+        }
+
         UserID = Convert.ToInt32(txtUserID.Text);
 
         Found = AUser.Find(UserID);
@@ -148,7 +164,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
             txtPasswordHash.Text = AUser.PasswordHash;
 
-            txtCreatedAt.Text = AUser.CreatedAt.ToShortDateString();
+            txtCreatedAt.Text =
+                AUser.CreatedAt.ToShortDateString();
 
             chkIsActive.Checked = AUser.IsActive;
 

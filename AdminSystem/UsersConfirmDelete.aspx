@@ -3,42 +3,69 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head runat="server">
-    <title></title>
-    <style type="text/css">
-        .auto-style1 {
-            margin-left: 160px;
-        }
-    </style>
+
+<title>Delete User</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet" />
+
 </head>
-<body>
-    <form id="form1" runat="server">
-  <div style="width: 493px; height: 97px; margin-left: 200px">
 
-      <p class="auto-style1" style="width: 326px; height: 88px">
-&nbsp;&nbsp;&nbsp; Are you sure you want to delete this user?
+<body class="bg-light">
 
-    <br class="auto-style1" /><br class="auto-style1" />
+<form id="form1" runat="server">
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div class="container mt-5">
 
-    <asp:Button ID="BtnYes"
-        runat="server"
-        Text="Yes"
-        OnClick="BtnYes_Click" />
+<div class="card shadow p-4 mx-auto"
+style="max-width:500px; border-radius:20px;">
 
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div class="text-center mb-3">
 
-    &nbsp;
-
-    <asp:Button ID="BtnNo"
-        runat="server"
-        Text="No"
-        OnClick="BtnNo_Click" />
-
-      </p>
+<asp:ImageButton ID="imgLogo"
+runat="server"
+ImageUrl="~/Images/ShinobiLogo.jpg"
+Width="80px"
+OnClick="imgLogo_Click"/>
 
 </div>
-    </form>
+
+<h2 class="text-center fw-bold mb-4">
+
+Delete User
+
+</h2>
+
+<p class="text-center">
+
+Are you sure you want to delete this user?
+
+</p>
+
+<div class="d-flex justify-content-center gap-3 mt-4">
+
+<asp:Button ID="BtnYes"
+runat="server"
+Text="Yes"
+CssClass="btn btn-danger rounded-pill px-5"
+OnClick="BtnYes_Click"/>
+
+<asp:Button ID="BtnNo"
+runat="server"
+Text="No"
+CssClass="btn btn-secondary rounded-pill px-5"
+OnClick="BtnNo_Click"/>
+
+</div>
+
+</div>
+
+</div>
+
+</form>
+
 </body>
+
 </html>
