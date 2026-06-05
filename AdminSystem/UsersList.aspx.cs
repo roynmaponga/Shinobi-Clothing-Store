@@ -69,6 +69,25 @@ public partial class _1_List : System.Web.UI.Page
         }
     }
 
+    protected void BtnApplyFilter_Click(object sender, EventArgs e)
+    {
+        ClsUsersCollection Users = new ClsUsersCollection();
 
+        Users.ReportByEmail(txtFilterEmail.Text);
 
+        lstUsers.DataSource = Users.UserList;
+
+        lstUsers.DataValueField = "UserID";
+
+        lstUsers.DataTextField = "Email";
+
+        lstUsers.DataBind();
+    }
+
+    protected void BtnClearFilter_Click(object sender, EventArgs e)
+    {
+        txtFilterEmail.Text = "";
+
+        DisplayUsers();
+    }
 }
