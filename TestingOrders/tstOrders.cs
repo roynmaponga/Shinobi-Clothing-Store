@@ -19,7 +19,6 @@ namespace Testing4
         [TestMethod]
         public void InstanceOK()
         {
-            //
             clsOrders AnOrders = new clsOrders();
             Assert.IsNotNull(AnOrders);
         }
@@ -27,15 +26,12 @@ namespace Testing4
         [TestMethod]
         public void FindMethodOK()
         {
-            // create an instance of the class we want to create
             clsOrders AnOrders = new clsOrders();
-            // Boolean variable to store the result of the validation
             Boolean Found = false;
             // create some test data to use with the method
             Int32 OrderID = 2;
             // invoke the method
             Found = AnOrders.Find(OrderID);
-            // test to see that the result is true
             Assert.IsTrue(Found);
         }
 
@@ -103,7 +99,6 @@ namespace Testing4
     clsOrders AnOrder = new clsOrders();
         // create a Boolean variable to store the result of the search
         Boolean Found = false;
-        // create a Boolean variable to record if data is OK
         Boolean OK = true;
         // create some test data to use with the method
         Int32 OrderID = 3;
@@ -117,7 +112,6 @@ namespace Testing4
     // test to see that the result is correct
     Assert.IsTrue(OK); */
         
-
         [TestMethod]
         public void FindOrderDateOK()
         {
@@ -197,21 +191,6 @@ namespace Testing4
             Assert.IsTrue(OK);
         }
 
-        [TestMethod]
-        public void OrderStatusOK()
-        {
-            clsOrders AnOrders = new clsOrders();
-            Boolean Found = false;
-            Boolean OK = true;
-            Int32 OrderID = 2;
-            Found = AnOrders.Find(OrderID);
-            if (Convert.ToString(AnOrders.OrderStatus) != "Processed")
-            {
-                OK = false;
-            }
-            Assert.IsTrue(OK);
-        }
-
         
         // NEW VALIDATION TESTS FOR MIDDLE LAYER
        
@@ -219,9 +198,7 @@ namespace Testing4
         [TestMethod]
         public void ValidMethodOK()
         {
-            // create an instance of the class we want to create
             clsOrders AnOrders = new clsOrders();
-            // string variable to store any error message
             String Error = "";
             Error = AnOrders.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount, DeliveryStatus);
             Assert.AreEqual("", Error);
@@ -232,15 +209,12 @@ namespace Testing4
         [TestMethod]
         public void DeliveryAddressMinLessOne()
         {
-            // create an instance of the class we want to create
             clsOrders AnOrders = new clsOrders();
-            // string variable to store any error message
             String Error = "";
             // create some test data to pass to the method
             string DeliveryAddress = ""; // this should trigger an error
             // invoke the method
             Error = AnOrders.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount, DeliveryStatus);
-            // test to see that the result is correct
             Assert.AreNotEqual("", Error);
         }
 

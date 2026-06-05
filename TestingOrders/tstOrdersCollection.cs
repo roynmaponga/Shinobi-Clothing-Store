@@ -24,7 +24,6 @@ namespace Testing4
             clsOrdersCollection AllOrders = new clsOrdersCollection();
             // Creating some test data to assign to the property
             List<clsOrders> TestList = new List<clsOrders>();
-
             // Creating the item of test data
             clsOrders TestItem = new clsOrders();
 
@@ -52,7 +51,6 @@ namespace Testing4
         {
             // Create an instance of the class we want to create
             clsOrdersCollection AllOrders = new clsOrdersCollection();
-
             // Create some test data to assign to the property
             clsOrders TestOrder = new clsOrders();
 
@@ -77,10 +75,8 @@ namespace Testing4
         {
             // Create an instance of the class we want to create
             clsOrdersCollection AllOrders = new clsOrdersCollection();
-
             // Create some test data to assign to the property
             List<clsOrders> TestList = new List<clsOrders>();
-
             // Create the item of test data
             clsOrders TestItem = new clsOrders();
 
@@ -108,10 +104,8 @@ namespace Testing4
         {
             // create an instance of the class we want to create
             clsOrdersCollection AllOrders = new clsOrdersCollection();
-
             // create the item of test data
             clsOrders TestItem = new clsOrders();
-
             // variable to store the primary key
             Int32 PrimaryKey = 0;
 
@@ -120,7 +114,6 @@ namespace Testing4
             TestItem.OrderDate = DateTime.Now.Date;
             TestItem.OrderStatus = "Pending";
             TestItem.DeliveryAddress = "123 University Road, Leicester";
-            TestItem.OrderStatus = "Pending";
             TestItem.TotalAmount = 45.99m;
             TestItem.IsPaid = true;
 
@@ -147,10 +140,8 @@ namespace Testing4
         {
             // create an instance of the class I want to create
             clsOrdersCollection AllOrders = new clsOrdersCollection();
-
             // create the item of test data
             clsOrders TestItem = new clsOrders();
-
             // variable to store the primary key
             Int32 PrimaryKey = 0;
 
@@ -199,10 +190,8 @@ namespace Testing4
         {
             // create an instance of the class I want to create
             clsOrdersCollection AllOrders = new clsOrdersCollection();
-
             // create the item of test data
             clsOrders TestItem = new clsOrders();
-
             // variable to store the primary key
             Int32 PrimaryKey = 0;
 
@@ -213,7 +202,6 @@ namespace Testing4
             TestItem.DeliveryAddress = "216 Some Street, Leicester";
             TestItem.TotalAmount = 10.50m;
             TestItem.IsPaid = false;
-
 
             // set ThisOrder to the test data
             AllOrders.ThisOrder = TestItem;
@@ -242,7 +230,6 @@ namespace Testing4
         {
             // create an instance of the class containing unfiltered results
             clsOrdersCollection AllOrders = new clsOrdersCollection();
-
             // create an instance of the filtered data
             clsOrdersCollection FilteredOrders = new clsOrdersCollection();
 
