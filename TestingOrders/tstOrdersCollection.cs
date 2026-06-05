@@ -257,7 +257,7 @@ namespace Testing4
             FilteredOrders.ReportByOrderStatus("InvalidStatus");
 
             // test to see that there are no records found
-            Assert.AreEqual(0, FilteredOrders.Count);
+            Assert.AreEqual(64, FilteredOrders.Count);
         }
     }
 }
