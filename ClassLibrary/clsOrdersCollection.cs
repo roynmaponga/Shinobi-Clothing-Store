@@ -33,7 +33,7 @@ namespace ClassLibrary
                 // Create a blank order object
                 clsOrders AnOrder = new clsOrders();
 
-                // Read in the fields for the current record safely checking for DBNull
+              
 
                 // OrderID (Primary Key - usually never null, but kept safe)
                 AnOrder.OrderID = Convert.IsDBNull(DB.DataTable.Rows[Index]["OrderID"])
@@ -227,4 +227,7 @@ namespace ClassLibrary
 
 
     }
+
+    }
+    
 }

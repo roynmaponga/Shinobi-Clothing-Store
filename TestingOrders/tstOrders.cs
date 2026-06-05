@@ -118,10 +118,10 @@ namespace Testing4
             clsOrders AnOrders = new clsOrders();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 OrderID = 2;
+            Int32 OrderID = 3;
             Found = AnOrders.Find(OrderID);
-            // Matches 01/06/2026 from your table image
-            if (Convert.ToDateTime(AnOrders.OrderDate).Date != Convert.ToDateTime("01/06/2026").Date)
+            //date
+            if (Convert.ToDateTime(AnOrders.OrderDate).Date != Convert.ToDateTime(05/05/2026).Date)
             {
                 OK = false;
             }
@@ -136,8 +136,8 @@ namespace Testing4
             Boolean OK = true;
             Int32 OrderID = 2;
             Found = AnOrders.Find(OrderID);
-            // Matches "Processed" from your table image
-            if (AnOrders.OrderStatus != "Processed")
+            // orderstatus
+            if (AnOrders.OrderStatus != "Pending")
             {
                 OK = false;
             }
@@ -152,7 +152,7 @@ namespace Testing4
             Boolean OK = true;
             Int32 OrderID = 2;
             Found = AnOrders.Find(OrderID);
-            if (AnOrders.DeliveryAddress != "456 New Road, Leicester")
+            if (AnOrders.DeliveryAddress != "33 High Street, Nottingham")
             {
                 OK = false;
             }
@@ -167,8 +167,8 @@ namespace Testing4
             Boolean OK = true;
             Int32 OrderID = 2;
             Found = AnOrders.Find(OrderID);
-            // Matches 120.50 from your table image
-            if (AnOrders.TotalAmount != 120.50m)
+            // totoal amount matching
+            if (AnOrders.TotalAmount != 99.99m)
             {
                 OK = false;
             }
@@ -183,7 +183,7 @@ namespace Testing4
             Boolean OK = true;
             Int32 OrderID = 2;
             Found = AnOrders.Find(OrderID);
-            // Matches True from your table image
+            // Oaid ok
             if (AnOrders.IsPaid != true)
             {
                 OK = false;
@@ -212,7 +212,7 @@ namespace Testing4
             clsOrders AnOrders = new clsOrders();
             String Error = "";
             // create some test data to pass to the method
-            string DeliveryAddress = ""; // this should trigger an error
+            string DeliveryAddress = ""; 
             // invoke the method
             Error = AnOrders.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount, DeliveryStatus);
             Assert.AreNotEqual("", Error);
@@ -245,7 +245,7 @@ namespace Testing4
             clsOrders AnOrders = new clsOrders();
             String Error = "";
             string DeliveryAddress = "";
-            DeliveryAddress = DeliveryAddress.PadRight(51, 'a'); // this should fail
+            DeliveryAddress = DeliveryAddress.PadRight(51, 'a'); 
             Error = AnOrders.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount, DeliveryStatus);
             Assert.AreNotEqual("", Error);
         }

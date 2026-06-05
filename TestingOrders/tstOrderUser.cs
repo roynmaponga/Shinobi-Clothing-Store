@@ -90,24 +90,24 @@ namespace Testing4
         [TestMethod]
         public void TestUserNamePWFound()
         {
-            //create an instance of the class we want to create
-            clsOrderUser AnUser = new clsAUser();
-            //create a Boolean variable to store the result of the search
-            Boolean Found = false;
-            //create a Boolean variable to record if the data is OK (assume it is)
-            Boolean OK = true;
-            //create some test data to use with the method
-            string UserName = "Dawn";
-            string Password = "password123";
-            //invoke the method
-            Found = AnUser.FindUser(UserName, Password);
-            //check the user id property
-            if (AnUser.UserName != UserName && AnUser.Password != Password)
-            {
-                OK = false;
-            }
-            //test to see that the result is correct
-            Assert.IsTrue(OK);
+            // create an instance of the class we want to create
+    clsOrderUser AnUser = new clsOrderUser();
+        //create a Boolean variable to store the result of the search
+        Boolean Found = false;
+        //create a Boolean variable to record if the data is OK (assume it is)
+        Boolean OK = true;
+        //create some test data to use with the method
+        string UserName = "Dawn";
+        string Password = "password123";
+        //invoke the method
+        Found = AnUser.FindUser(UserName, Password);
+    //check the data properties match what was found
+    if (AnUser.UserName != UserName || AnUser.Password != Password)
+    {
+        OK = false;
+    }
+    //test to see that the result is correct
+    Assert.IsTrue(OK);
         }
 
     }
