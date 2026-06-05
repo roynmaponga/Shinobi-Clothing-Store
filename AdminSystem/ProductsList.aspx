@@ -10,6 +10,21 @@
     <form id="form1" runat="server">
         <div>
         </div>
+        <asp:ListBox ID="lstproductList" runat="server" Height="262px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" Width="329px"></asp:ListBox>
+        <p>
+            <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" Text="Add" />
+        </p>
+        <p>
+            <asp:Button ID="btmEdit" runat="server" OnClick="btmEdit_Click" Text="Edit" />
+        </p>
+        <p>
+            <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" Text="Delete" />
+        </p>
+        <p>
+            &nbsp;</p>
+        <p>
+            <asp:Label ID="lblError" runat="server" Text="lblError"></asp:Label>
+        </p>
     </form>
 </body>
 </html>

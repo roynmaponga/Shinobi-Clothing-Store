@@ -1,124 +1,128 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
+using System.Data;
 
 namespace ClassLibrary
 {
-    public class clsproductCollection
+    [TestClass]
+    public class ClsproductCollection
     {
-        private string mproductname;
-
-        public string ProductName
+        private List<clsproduct> mProductList = new List<clsproduct>();
+        clsproduct mThisproduct = new clsproduct();
+        public List<clsproduct> ProductList
         {
-            get { return mproductname; }
-            set { mproductname = value; }
+            get { return mProductList; }
+            set { mProductList = value; }
         }
-
-        private int mcategory;
-        public int category
+        public int Count
         {
-            get { return mcategory; }
-            set { mcategory = value; }
-        }
-        private decimal mprice;
-        public decimal Price
-        {
-            get { return mprice; }
-            set { mprice = value; }
-
-        }
-        private string mcolor;
-        public string Color
-        {
-            get { return mcolor; }
-            set { mcolor = value; }
-        }
-        private string msize;
-        public string Size
-        {
-            get { return msize; }
-            set { msize = value; }
-        }
-        private int mstockquantity;
-        public int StockQuantity
-        {
-            get { return mstockquantity; }
-            set { mstockquantity = value; }
-        }
-        private DateTime mdateaddede;
-        public DateTime DateAdded
-        {
-            get { return mdateaddede; }
-            set { mdateaddede = value; }
-        }
-
-        private bool mactive;
-        public bool Active
-        {
-            get { return mactive; }
-            set { mactive = value; }
-        }
-
-
-
-
-        public clsproductCollection()
-        { }
-
-
-
-
-        public bool active { get; set; }
-        public DateTime dateAdded { get; set; }
-        public string Productname { get; set; }
-        public string Category { get; set; }
-        public decimal price { get; set; }
-        public int stockQuantity { get; set; }
-        public string color { get; set; }
-        public string size { get; set; }
-        public object Privet { get; set; }
-
-        public bool Find(int productname)
-        {
-            mproductname = "ptoduct";
-            mcategory = category;
-            mprice = price;
-            mcolor = "color";
-            mstockquantity = stockQuantity;
-            mdateaddede = dateAdded;
-            mactive = true;
-            return true;
-        }
-
-        public string Valid(string color, string price, string productname, string size, string stockQuantity, string dateAdded, string active)
-        {
-            return "";
-        }
-        public string Valid(string color, string price, string productname, string size, string stockQuantity, string dateAdded)
-        {
-            string Error = "";
-            DateTime DateTemp;
-            if (color.Length == 0)
-            {
-                Error = Error + "The color may not be blank : ";
+            get { return mProductList.Count; }
+            set
+            { // we shall worry about this later
             }
-            if (color.Length > 5)
+        }
+        public clsproduct Thisproduct
+        {
+            get { return mThisproduct; }
+            set { mThisproduct = value; }
+        }
+        public ClsproductCollection()
+        {
+            // here we will add some hard coded data to make sure the list is not empty when we instantiate it
+            clsproduct TestItem = new clsproduct();
+            TestItem.Active = true;
+            TestItem.Productname = "Test Product";
+            TestItem.price = 9.99m;
+            TestItem.StockQuantity = 100;
+            TestItem.size = "Medium";
+            TestItem.color = "Red";
+            mProductList.Add(TestItem);
+            TestItem = new clsproduct();
+            TestItem.Active = true;
+            TestItem.Productname = "Another Product";
+            TestItem.Price = 19.99m;
+            TestItem.StockQuantity = 50;
+            TestItem.size = "Large";
+            TestItem.color = "Blue";
+            mProductList.Add(TestItem);
+        }
+
+        public ClsproductCollection(string productname)
+        {
+            Int32 Index = 0;
+
+            clsDataConnection DB = new clsDataConnection();
+            DB.Execute("sproc_tblproducts_selectAll");
+
+            Int32 RecordCount = DB.Count;
+
+            while (Index < RecordCount)
             {
-                Error = Error + "The color must be less than 5 characters : ";
+                clsproduct Aproduct = new clsproduct();
+
+                Aproduct.Productname = DB.DataTable.Rows[Index]["productname"].ToString();
+                Aproduct.price = Convert.ToDecimal(DB.DataTable.Rows[Index]["price"]);
+                Aproduct.StockQuantity = Convert.ToInt32(DB.DataTable.Rows[Index]["stockQuantity"]);
+                Aproduct.size = DB.DataTable.Rows[Index]["size"].ToString();
+                Aproduct.color = DB.DataTable.Rows[Index]["colour"].ToString().Trim();
+
+                ProductList.Add(Aproduct);
+
+                Index++;
             }
-            DateTemp = Convert.ToDateTime(dateAdded);
-            if (DateTemp < DateTime.Now.Date)
-            {
-                Error = Error + "The date cannot be in the past : ";
-            }
-            if (DateTemp > DateTime.Now.Date)
-            {
-                Error = Error + "The date cannot be in the future : ";
-            }
-            return Error;
+        }
+
+
+
+        public int Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+       
+
+            DB.AddParameter("@productname", Thisproduct.Productname);
+            DB.AddParameter("@price", Thisproduct.price);
+            DB.AddParameter("@size", Thisproduct.size);
+            DB.AddParameter("@colour", Thisproduct.color);
+            DB.AddParameter("@stockQuantity", Thisproduct.StockQuantity);
+            DB.AddParameter("@category", Thisproduct.category);
+
+            return Convert.ToInt32(DB.Execute("sproc_tblProducts_Insert"));
+        }
+        
+
+        
+        
+            public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@id", Thisproduct.id);
+            DB.AddParameter("@productname", Thisproduct.Productname);
+            DB.AddParameter("@price", Thisproduct.price);
+            DB.AddParameter("@size", Thisproduct.size);
+            DB.AddParameter("@colour", Thisproduct.color);
+            DB.AddParameter("@stockQuantity", Thisproduct.StockQuantity);
+            DB.AddParameter("@category", Thisproduct.category);
+
+            DB.Execute("sproc_tblproducts_Update");
+        }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@id", Thisproduct.id);
+            DB.Execute("sproc_tblproducts_Delete");
+        }
+
+        public void ReportByPostCode(string v)
+        {
+            
         }
     }
-}
+    }
+    
 
 
 

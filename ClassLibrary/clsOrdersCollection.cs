@@ -76,8 +76,8 @@ namespace ClassLibrary
                 Index++;
             }
         }
-        
-        
+
+
 
         // private data member for the List
         private List<clsOrders> mOrdersList = new List<clsOrders>();
@@ -123,20 +123,20 @@ namespace ClassLibrary
 
         public int Add()
         {
-            
+
             // adds a record to the database based on the values of mThisOrder
             // connect to the database
             clsDataConnection DB = new clsDataConnection();
 
             // set the parameters for the stored procedure
-            
+
             DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
             DB.AddParameter("@DeliveryAddress", mThisOrder.DeliveryAddress);
             DB.AddParameter("@OrderStatus", mThisOrder.OrderStatus);
             DB.AddParameter("@TotalAmount", mThisOrder.TotalAmount);
             DB.AddParameter("@IsPaid", mThisOrder.IsPaid);
 
-           
+
 
             // execute the query returning the primary key value
             return DB.Execute("sproc_tblOrders_Insert");
@@ -176,15 +176,43 @@ namespace ClassLibrary
 
         public void ReportByOrderStatus(string v)
         {
-            
+
         }
         public void ReportByOrderStatusNoneFound(string Orderstatus)
         {
             clsDataConnection DB = new clsDataConnection();
-                DB.AddParameter("@OrderStatus", Orderstatus);
-                DB.Execute("sproc_tblOrders_FilterByOrderStatus");
+            DB.AddParameter("@OrderStatus", Orderstatus);
+            DB.Execute("sproc_tblOrders_FilterByOrderStatus");
         }
+        public ClsproductCollection()
+        { clsDataConnection DB = new clsDataConnection();
+            DB.Execute("sproc_tblproducts_selectAll");
+            PopulateArray(DB);
+        }
+        void PopulateArray(clsDataConnection DB)
+        {
+            Int32 Index = 0;
+            Int32 RecordCount;
 
+            RecordCount = DB.Count;
+
+            ProductList = new List<clsproduct>();
+
+            while (Index < RecordCount)
+            {
+                clsproduct Aproduct = new clsproduct();
+
+                Aproduct.Productname = DB.DataTable.Rows[Index]["productname"].ToString();
+                Aproduct.price = Convert.ToDecimal(DB.DataTable.Rows[Index]["price"]);
+                Aproduct.StockQuantity = Convert.ToInt32(DB.DataTable.Rows[Index]["stockQuantity"]);
+                Aproduct.size = DB.DataTable.Rows[Index]["size"].ToString();
+                Aproduct.color = DB.DataTable.Rows[Index]["colour"].ToString();
+
+                object value = ProductList.Add(Aproduct);
+
+                Index++;
+            }
+        }
     }
-    
-}
+
+
