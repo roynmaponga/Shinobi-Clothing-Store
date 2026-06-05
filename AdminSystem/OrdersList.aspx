@@ -9,10 +9,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Button ID="btnMainMenu" runat="server" OnClick="btnMainMenu_Click" style="z-index: 1; left: 377px; top: 574px; position: absolute" Text="Return to main menu" />
             <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 12px; top: 628px; position: absolute; height: 17px" Text="lblError"></asp:Label>
             <asp:Label ID="Label1" runat="server" style="z-index: 1; left: 15px; top: 526px; position: absolute" Text="Enter by DeliveryAddress"></asp:Label>
             <asp:TextBox ID="txtFilter" runat="server" style="z-index: 1; left: 242px; top: 521px; position: absolute"></asp:TextBox>
-            <asp:ListBox ID="lstOrdersList" runat="server" style="z-index: 1; left: 7px; top: 21px; position: absolute; height: 368px; width: 506px" OnSelectedIndexChanged="lstOrdersList_SelectedIndexChanged"></asp:ListBox>
+            <asp:ListBox ID="lstOrdersList" runat="server" style="z-index: 1; left: 10px; top: 5px; position: absolute; height: 368px; width: 506px" OnSelectedIndexChanged="lstOrdersList_SelectedIndexChanged"></asp:ListBox>
         </div>
         <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" style="z-index: 1; left: 14px; top: 423px; position: absolute" Text="Add" />
         <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" style="z-index: 1; left: 100px; top: 424px; position: absolute" Text="Edit" />

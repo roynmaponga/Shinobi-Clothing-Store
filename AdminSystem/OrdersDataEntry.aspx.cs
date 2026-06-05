@@ -159,4 +159,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
             chkPaid.Checked = AnOrder.IsPaid;
         }
     }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
+    }
 }
