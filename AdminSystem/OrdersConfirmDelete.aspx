@@ -6,10 +6,17 @@
 <head runat="server">
     <title></title>
 </head>
-<body>
+<body style="height: 283px; width: 573px">
     <form id="form1" runat="server">
         <div>
         </div>
+        <p>
+            <asp:Label ID="Label1" runat="server" style="z-index: 1; left: 184px; top: 137px; position: absolute" Text="Are you sure you want to delete?"></asp:Label>
+        </p>
+        <p>
+            <asp:Button ID="btnYes" runat="server" OnClick="btnYes_Click" style="z-index: 1; left: 233px; top: 199px; position: absolute" Text="Yes" />
+        </p>
+        <asp:Button ID="btnNo" runat="server" OnClick="btnNo_Click" style="z-index: 1; left: 323px; top: 199px; position: absolute" Text="No" />
     </form>
 </body>
 </html>

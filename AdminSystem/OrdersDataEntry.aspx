@@ -20,10 +20,11 @@
         </p>
         <asp:Label ID="lblTotalamount" runat="server" style="z-index: 1; left: 10px; top: 138px; position: absolute" Text="TotalAmount" width="72px"></asp:Label>
         <asp:TextBox ID="txtTotalAmount" runat="server" OnTextChanged="TextBox4_TextChanged" style="z-index: 1; left: 158px; top: 134px; position: absolute; width: 129px"></asp:TextBox>
+        <asp:Button ID="btmFind" runat="server" OnClick="btmFind_Click" style="z-index: 1; left: 328px; top: 31px; position: absolute" Text="Find" />
         <p>
             &nbsp;</p>
-        <asp:Label ID="lblDeliverystatus" runat="server" style="z-index: 1; left: 14px; top: 183px; position: absolute; height: 22px" Text="DeliveryStatus" width="72px"></asp:Label>
-        <asp:DropDownList ID="ddlDeliveryStatus" runat="server" style="z-index: 1; left: 157px; top: 179px; position: absolute" width="129px">
+        <asp:Label ID="lblOrderstatus" runat="server" style="z-index: 1; left: 14px; top: 183px; position: absolute; height: 22px; right: 849px;" Text="OrderStatus" width="72px"></asp:Label>
+        <asp:DropDownList ID="ddlOrderstatus" runat="server" style="z-index: 1; left: 157px; top: 179px; position: absolute" width="129px">
             <asp:ListItem>Out for delivery</asp:ListItem>
             <asp:ListItem>In transit</asp:ListItem>
             <asp:ListItem>Delivered</asp:ListItem>
@@ -31,7 +32,9 @@
         <p>
             &nbsp;</p>
         <p>
-            <asp:CheckBox ID="chkPaid" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" style="z-index: 1; left: 150px; top: 233px; position: absolute" Text="Paid" />
+            <asp:CheckBox ID="chkPaid" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" style="z-index: 1; left: 148px; top: 263px; position: absolute" Text="Paid" />
+            <asp:Label ID="lblDeliveryAddress" runat="server" style="z-index: 1; left: 11px; top: 222px; position: absolute" Text="DeliveyAddress"></asp:Label>
+            <asp:TextBox ID="txtDeliveryAddress" runat="server" style="z-index: 1; left: 155px; top: 221px; position: absolute"></asp:TextBox>
         </p>
         <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" style="z-index: 1; left: 12px; top: 362px; position: absolute" Text="OK" />
         <asp:Label ID="lblerror" runat="server" style="z-index: 1; left: 18px; top: 310px; position: absolute"></asp:Label>

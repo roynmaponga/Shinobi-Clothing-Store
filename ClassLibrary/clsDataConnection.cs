@@ -152,8 +152,6 @@ public class clsDataConnection
 
     public Int32 Execute(string SProcName)
     {
-        ///public method used to execute the named stored procedure
-        ///accepts one parameter which is the name of the stored procedure to use
         //open the stored procedure
         //initialise the connection to the database
         connectionToDB = new SqlConnection(connectionString);
@@ -182,7 +180,6 @@ public class clsDataConnection
         dataChannel.SelectCommand = dataCommand;
         //use the copmmand builder to generate the sql insert delete etc
         commandBuilder = new SqlCommandBuilder(dataChannel);
-        //fill the data adapter
         dataChannel.Fill(dataTable);
         //close the connection
         connectionToDB.Close();

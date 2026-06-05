@@ -77,6 +77,7 @@ namespace ClassLibrary
             }
         }
         
+        
 
         // private data member for the List
         private List<clsOrders> mOrdersList = new List<clsOrders>();
@@ -128,15 +129,62 @@ namespace ClassLibrary
             clsDataConnection DB = new clsDataConnection();
 
             // set the parameters for the stored procedure
+            
             DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
             DB.AddParameter("@DeliveryAddress", mThisOrder.DeliveryAddress);
             DB.AddParameter("@OrderStatus", mThisOrder.OrderStatus);
             DB.AddParameter("@TotalAmount", mThisOrder.TotalAmount);
             DB.AddParameter("@IsPaid", mThisOrder.IsPaid);
 
+           
+
             // execute the query returning the primary key value
             return DB.Execute("sproc_tblOrders_Insert");
         }
+
+        public void Update()
+        {
+            // update an existing record based on the values of thisOrder
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+
+            // set the parameters for the new stored procedure
+            DB.AddParameter("@OrderID", mThisOrder.OrderID);
+            DB.AddParameter("@UserID", mThisOrder.UserID);
+            DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
+            DB.AddParameter("@OrderStatus", mThisOrder.OrderStatus);
+            DB.AddParameter("@DeliveryAddress", mThisOrder.DeliveryAddress);
+            DB.AddParameter("@TotalAmount", mThisOrder.TotalAmount);
+            DB.AddParameter("@IsPaid", mThisOrder.IsPaid);
+
+            // execute the stored procedure
+            DB.Execute("sproc_tblOrders_Update");
+        }
+
+        public void Delete()
+        {
+
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+
+            // CRITICAL: It MUST be the private backing field 'mThisOrder'
+            DB.AddParameter("@OrderID", mThisOrder.OrderID);
+
+            // execute the stored procedure
+            DB.Execute("sproc_tblOrders_Delete");
+        }
+
+        public void ReportByOrderStatus(string v)
+        {
+            
+        }
+        public void ReportByOrderStatusNoneFound(string Orderstatus)
+        {
+            clsDataConnection DB = new clsDataConnection();
+                DB.AddParameter("@OrderStatus", Orderstatus);
+                DB.Execute("sproc_tblOrders_FilterByOrderStatus");
+        }
+
     }
     
 }

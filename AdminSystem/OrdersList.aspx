@@ -9,9 +9,12 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:ListBox ID="lstOrdersList" runat="server" style="z-index: 1; left: 12px; top: 22px; position: absolute; height: 459px; width: 506px"></asp:ListBox>
+            <asp:Label ID="lblError" runat="server" style="z-index: 1; left: 18px; top: 557px; position: absolute; height: 15px" Text="lblError"></asp:Label>
+            <asp:ListBox ID="lstOrdersList" runat="server" style="z-index: 1; left: 9px; top: 7px; position: absolute; height: 459px; width: 506px"></asp:ListBox>
         </div>
         <asp:Button ID="btnAdd" runat="server" OnClick="btnAdd_Click" style="z-index: 1; left: 20px; top: 503px; position: absolute" Text="Add" />
+        <asp:Button ID="btnEdit" runat="server" OnClick="btnEdit_Click" style="z-index: 1; left: 91px; top: 504px; position: absolute" Text="Edit" />
+        <asp:Button ID="btnDelete" runat="server" OnClick="btnDelete_Click" style="z-index: 1; left: 170px; top: 504px; position: absolute; right: 855px" Text="Delete" />
     </form>
 </body>
 </html>
