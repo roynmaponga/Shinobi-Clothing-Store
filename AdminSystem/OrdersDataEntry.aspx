@@ -41,6 +41,7 @@
         <p>
             <asp:Button ID="btnCancel" runat="server" style="z-index: 1; left: 97px; top: 361px; position: absolute; margin-bottom: 0px" Text="Cancel" />
         </p>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" style="z-index: 1; left: 237px; top: 359px; position: absolute" Text="Return To the main menu" />
     </form>
 </body>
 </html>
