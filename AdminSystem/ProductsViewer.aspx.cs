@@ -9,13 +9,17 @@ using ClassLibrary;
 
 public partial class _1Viewer : System.Web.UI.Page
 {
-    public Clsproduct Aproduct { get; private set; }
+    public clsproduct Aproduct { get; private set; }
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Clsproduct clsproduct = new Clsproduct(); 
+        clsproduct clsproduct = new clsproduct(); 
         
-        Aproduct=(Clsproduct)Session["Aproduct"];
-        Response.Write(Aproduct.Colour);
+        Aproduct=(clsproduct)Session["Aproduct"];
+        Response.Write(Aproduct.color);
+        Response.Write(Aproduct.size);
+        Response.Write(Aproduct.price);
+        Response.Write(Aproduct.StockQuantity);
+        Response.Write(Aproduct.Productname);
     }
 }

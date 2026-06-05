@@ -211,10 +211,17 @@ namespace ClassLibrary
             DB.Execute("sproc_tblOrders_Delete");
         }
 
+        public void ReportByOrderStatus(string v)
+        {
+
+        }
+        public void ReportByOrderStatusNoneFound(string Orderstatus)
         public void ReportByOrderStatus(string OrderStatus)
         {
             // connect to the database
             clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@OrderStatus", Orderstatus);
+            DB.Execute("sproc_tblOrders_FilterByOrderStatus");
             // send the OrderStatus parameter to the stored procedure
             DB.AddParameter("@OrderStatus", OrderStatus);
             // execute the filter stored procedure
@@ -223,6 +230,37 @@ namespace ClassLibrary
             PopulateArray(DB);
 
         }
+        public ClsproductCollection()
+        { clsDataConnection DB = new clsDataConnection();
+            DB.Execute("sproc_tblproducts_selectAll");
+            PopulateArray(DB);
+        }
+        void PopulateArray(clsDataConnection DB)
+        {
+            Int32 Index = 0;
+            Int32 RecordCount;
+
+            RecordCount = DB.Count;
+
+            ProductList = new List<clsproduct>();
+
+            while (Index < RecordCount)
+            {
+                clsproduct Aproduct = new clsproduct();
+
+                Aproduct.Productname = DB.DataTable.Rows[Index]["productname"].ToString();
+                Aproduct.price = Convert.ToDecimal(DB.DataTable.Rows[Index]["price"]);
+                Aproduct.StockQuantity = Convert.ToInt32(DB.DataTable.Rows[Index]["stockQuantity"]);
+                Aproduct.size = DB.DataTable.Rows[Index]["size"].ToString();
+                Aproduct.color = DB.DataTable.Rows[Index]["colour"].ToString();
+
+                object value = ProductList.Add(Aproduct);
+
+                Index++;
+            }
+        }
+    }
+
 
 
 
