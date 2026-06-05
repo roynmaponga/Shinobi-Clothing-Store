@@ -74,20 +74,35 @@ namespace ClassLibrary
         public bool Active { get; set; }
 
         // The Find Method
-        public bool Find(int orderID)
+        public bool Find(int OrderID)
         {
-            // Set the private data members with hardcoded test data
-            mOrderID = 1;
-            mUserID = 123;
-            mOrderDate = Convert.ToDateTime("18/05/2026");
-            mOrderStatus = "Pending";
-            mDeliveryAddress = "123 Main Street";
-            mTotalAmount = 55.50m;
-            mIsPaid = true;
-            mDeliveryStatus = "Processing";
+            // create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            // add the parameter for the order id to search for
+            DB.AddParameter("@OrderID", OrderID);
+            // execute the stored procedure
+            DB.Execute("sproc_tblOrders_FilterByOrderID");
 
-            // Always return true for now to indicate the record was found
-            return true;
+            // if one record is found (there should be either one or zero)
+            if (DB.Count == 1)
+            {
+                // copy the data from the database to the private data members
+                mOrderID = Convert.ToInt32(DB.DataTable.Rows[0]["OrderID"]);
+                mOrderDate = Convert.ToDateTime(DB.DataTable.Rows[0]["OrderDate"]);
+                mOrderStatus = Convert.ToString(DB.DataTable.Rows[0]["OrderStatus"]);
+                mDeliveryAddress = Convert.ToString(DB.DataTable.Rows[0]["DeliveryAddress"]);
+                mTotalAmount = Convert.ToDecimal(DB.DataTable.Rows[0]["TotalAmount"]);
+                mIsPaid = Convert.ToBoolean(DB.DataTable.Rows[0]["IsPaid"]);
+
+                // return that everything worked OK
+                return true;
+            }
+            // if no record was found
+            else
+            {
+                // return false indicating there is a problem
+                return false;
+            }
         }
 
         // function for the public validation method

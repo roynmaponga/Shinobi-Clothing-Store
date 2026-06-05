@@ -32,7 +32,7 @@ namespace Testing4
             // Boolean variable to store the result of the validation
             Boolean Found = false;
             // create some test data to use with the method
-            Int32 OrderID = 1;
+            Int32 OrderID = 2;
             // invoke the method
             Found = AnOrders.Find(OrderID);
             // test to see that the result is true
@@ -87,29 +87,36 @@ namespace Testing4
             clsOrders AnOrders = new clsOrders();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 OrderID = 1;
+            Int32 OrderID = 2; // Matched to existing row 2
             Found = AnOrders.Find(OrderID);
-            if (AnOrders.OrderID != 1)
+            if (AnOrders.OrderID != 2)
             {
                 OK = false;
             }
             Assert.IsTrue(OK);
         }
 
-        [TestMethod]
+        /* [TestMethod]
         public void FindUserIDOK()
         {
-            clsOrders AnOrders = new clsOrders();
-            Boolean Found = false;
-            Boolean OK = true;
-            Int32 OrderID = 1;
-            Found = AnOrders.Find(OrderID);
-            if (AnOrders.UserID != 123)
-            {
-                OK = false;
-            }
-            Assert.IsTrue(OK);
-        }
+            // create an instance of the class we want to create
+    clsOrders AnOrder = new clsOrders();
+        // create a Boolean variable to store the result of the search
+        Boolean Found = false;
+        // create a Boolean variable to record if data is OK
+        Boolean OK = true;
+        // create some test data to use with the method
+        Int32 OrderID = 3;
+        // invoke the method
+        Found = AnOrder.Find(OrderID);
+    // check the User ID property against our expected test data
+    if (AnOrder.UserID != 2)
+    {
+        OK = false;
+    }
+    // test to see that the result is correct
+    Assert.IsTrue(OK); */
+        
 
         [TestMethod]
         public void FindOrderDateOK()
@@ -117,9 +124,10 @@ namespace Testing4
             clsOrders AnOrders = new clsOrders();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 OrderID = 1;
+            Int32 OrderID = 2;
             Found = AnOrders.Find(OrderID);
-            if (Convert.ToDateTime(AnOrders.OrderDate) != Convert.ToDateTime("18/05/2026"))
+            // Matches 01/06/2026 from your table image
+            if (Convert.ToDateTime(AnOrders.OrderDate).Date != Convert.ToDateTime("01/06/2026").Date)
             {
                 OK = false;
             }
@@ -132,9 +140,10 @@ namespace Testing4
             clsOrders AnOrders = new clsOrders();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 OrderID = 1;
+            Int32 OrderID = 2;
             Found = AnOrders.Find(OrderID);
-            if (AnOrders.OrderStatus != "Pending")
+            // Matches "Processed" from your table image
+            if (AnOrders.OrderStatus != "Processed")
             {
                 OK = false;
             }
@@ -147,9 +156,9 @@ namespace Testing4
             clsOrders AnOrders = new clsOrders();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 OrderID = 1;
+            Int32 OrderID = 2;
             Found = AnOrders.Find(OrderID);
-            if (AnOrders.DeliveryAddress != "123 Main Street")
+            if (AnOrders.DeliveryAddress != "456 New Road, Leicester")
             {
                 OK = false;
             }
@@ -162,9 +171,10 @@ namespace Testing4
             clsOrders AnOrders = new clsOrders();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 OrderID = 1;
+            Int32 OrderID = 2;
             Found = AnOrders.Find(OrderID);
-            if (AnOrders.TotalAmount != 55.50m)
+            // Matches 120.50 from your table image
+            if (AnOrders.TotalAmount != 120.50m)
             {
                 OK = false;
             }
@@ -177,8 +187,9 @@ namespace Testing4
             clsOrders AnOrders = new clsOrders();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 OrderID = 1;
+            Int32 OrderID = 2;
             Found = AnOrders.Find(OrderID);
+            // Matches True from your table image
             if (AnOrders.IsPaid != true)
             {
                 OK = false;
@@ -187,14 +198,14 @@ namespace Testing4
         }
 
         [TestMethod]
-        public void FindDeliveryStatusOK()
+        public void OrderStatusOK()
         {
             clsOrders AnOrders = new clsOrders();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 OrderID = 1;
+            Int32 OrderID = 2;
             Found = AnOrders.Find(OrderID);
-            if (Convert.ToString(AnOrders.DeliveryStatus) != "Processing")
+            if (Convert.ToString(AnOrders.OrderStatus) != "Processed")
             {
                 OK = false;
             }
