@@ -180,7 +180,6 @@ public class clsDataConnection
         dataChannel.SelectCommand = dataCommand;
         //use the copmmand builder to generate the sql insert delete etc
         commandBuilder = new SqlCommandBuilder(dataChannel);
-        //fill the data adapter
         dataChannel.Fill(dataTable);
         //close the connection
         connectionToDB.Close();
