@@ -89,7 +89,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Error = AnOrder.Valid(UserID, OrderDate, OrderStatus, DeliveryAddress, TotalAmount);
         if (Error == "")
         {
-            // capture the order id // DON'T MISS THIS BIT !!!!!
+            // capture the order id
             AnOrder.OrderID = OrderID;
             // capture the user id
             AnOrder.UserID = Convert.ToInt32(UserID);
@@ -107,7 +107,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             // create a new instance of the order collection
             clsOrdersCollection OrderList = new clsOrdersCollection();
 
-            // if this is a new record i.e. OrderID = -1 then add the data
+            // if this is a new record 
             if (OrderID == -1)
             {
                 // set the ThisOrder property

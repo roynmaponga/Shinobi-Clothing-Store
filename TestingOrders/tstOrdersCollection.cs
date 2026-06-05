@@ -27,7 +27,7 @@ namespace Testing4
             // Creating the item of test data
             clsOrders TestItem = new clsOrders();
 
-            // Set properties to match the database row patterns
+            
             TestItem.OrderID = 27;
             TestItem.UserID = 27;
             TestItem.OrderDate = DateTime.Now.Date;
@@ -54,7 +54,7 @@ namespace Testing4
             // Create some test data to assign to the property
             clsOrders TestOrder = new clsOrders();
 
-            // Set the properties matching row 28 schema format
+          
             TestOrder.OrderID = 28;
             TestOrder.UserID = 28;
             TestOrder.OrderDate = DateTime.Now.Date;
@@ -162,7 +162,7 @@ namespace Testing4
             // set the primary key of the test data
             TestItem.OrderID = PrimaryKey;
 
-            // modify the test record completely
+            // data to match the table
             TestItem.UserID = 5;
             TestItem.OrderDate = DateTime.Now.Date;
             TestItem.OrderStatus = "Shipped";
@@ -250,7 +250,7 @@ namespace Testing4
             FilteredOrders.ReportByOrderStatus("NonExistentStatus123!");
 
             // test to see that there are no records found
-            Assert.AreEqual(34, FilteredOrders.Count);
+            Assert.AreEqual(0, FilteredOrders.Count);
         }
     }
 }

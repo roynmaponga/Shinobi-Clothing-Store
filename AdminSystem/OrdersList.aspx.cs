@@ -99,12 +99,12 @@ public partial class _1_List : System.Web.UI.Page
         // retrieve the value of order status from the presentation layer
         AnOrder.ReportByOrderStatus(txtFilter.Text);
 
-        // CHANGE THIS TO ORDERSLIST (WITH AN 'S')
+     
         lstOrdersList.DataSource = AnOrder.OrdersList;
 
         // set the name of the primary key
         lstOrdersList.DataValueField = "OrderID";
-        // set the name of the field to display
+      
         lstOrdersList.DataTextField = "DeliveryAddress";
         // bind the data to the list
         lstOrdersList.DataBind();
@@ -120,12 +120,12 @@ public partial class _1_List : System.Web.UI.Page
         // clear any existing filter to tidy up the interface
         txtFilter.Text = "";
 
-        // CHANGE THIS TO ORDERSLIST (WITH AN 'S')
+       
         lstOrdersList.DataSource = AnOrder.OrdersList;
 
-        // set the name of the primary key
+       
         lstOrdersList.DataValueField = "OrderID";
-        // set the name of the field to display
+    
         lstOrdersList.DataTextField = "DeliveryAddress";
         // bind the data to the list
         lstOrdersList.DataBind();
