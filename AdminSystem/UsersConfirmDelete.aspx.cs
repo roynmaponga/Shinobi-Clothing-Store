@@ -15,13 +15,25 @@ public partial class _1_ConfirmDelete : System.Web.UI.Page
         UserID = Convert.ToInt32(Session["UserID"]);
     }
 
+    protected void imgLogo_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("TeamMainMenu.aspx");
+    }
+
     protected void BtnYes_Click(object sender, EventArgs e)
     {
         ClsUsersCollection UserBook = new ClsUsersCollection();
 
         UserBook.ThisUser.Find(UserID);
 
+        string DeletedEmail =
+            UserBook.ThisUser.Email;
+
         UserBook.Delete();
+
+        Session["DeleteMessage"] =
+            "User " + DeletedEmail +
+            " was deleted successfully.";
 
         Response.Redirect("UsersList.aspx");
     }

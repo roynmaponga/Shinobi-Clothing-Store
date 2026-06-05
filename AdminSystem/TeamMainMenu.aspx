@@ -14,12 +14,24 @@
             <div class="card shadow p-4 mx-auto" style="max-width: 500px;">
                 <h2 class="text-center mb-3">SHINOBI Team Main Menu</h2>
                 <p class="text-center text-muted">Please choose a section to continue.</p>
+                <p class="text-center">
+
+    Logged in as:
+    <asp:Label ID="lblUser"
+        runat="server">
+    </asp:Label>
+</p>
 
                 <div class="d-grid gap-3">
                     <asp:Button ID="btnSales" runat="server" Text="Sales" CssClass="btn btn-primary" OnClick="btnSales_Click" />
                     <asp:Button ID="btnOrders" runat="server" Text="Orders" CssClass="btn btn-secondary" OnClick="btnOrders_Click" />
                     <asp:Button ID="btnProducts" runat="server" Text="Products" CssClass="btn btn-success" OnClick="btnProducts_Click" />
                     <asp:Button ID="btnUsers" runat="server" Text="Users" CssClass="btn btn-dark" OnClick="btnUsers_Click" />
+                    <asp:Button ID="btnLogout"
+    runat="server"
+    Text="Logout"
+    CssClass="btn btn-danger"
+    OnClick="btnLogout_Click" />
                 </div>
             </div>
         </div>

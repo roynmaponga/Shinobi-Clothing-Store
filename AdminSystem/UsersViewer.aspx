@@ -3,23 +3,57 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head runat="server">
-    <title>Users Viewer</title>
+
+<title>Users Viewer</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet" />
+
 </head>
-<body>
 
-    <form id="form1" runat="server">
+<body class="bg-light">
 
-        <div>
+<form id="form1" runat="server">
 
-            <h2>Users Viewer</h2>
+<div class="container mt-5">
 
-            <asp:Button ID="BtnBack" runat="server"
-                Text="Back"
-                OnClick="BtnBack_Click" />
-        </div>
+<div class="card shadow p-4 mx-auto"
+style="max-width:500px; border-radius:20px;">
 
-    </form>
+<div class="text-center mb-3">
+
+<asp:ImageButton ID="imgLogo"
+runat="server"
+ImageUrl="~/Images/ShinobiLogo.jpg"
+Width="80px"
+OnClick="imgLogo_Click"/>
+
+</div>
+
+<h2 class="text-center mb-4">
+
+Users Viewer
+
+</h2>
+
+<div class="d-grid">
+
+<asp:Button ID="BtnBack"
+runat="server"
+Text="Back"
+CssClass="btn btn-dark rounded-pill"
+OnClick="BtnBack_Click"/>
+
+</div>
+
+</div>
+
+</div>
+
+</form>
 
 </body>
+
 </html>
