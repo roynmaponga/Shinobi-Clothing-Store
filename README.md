@@ -264,7 +264,7 @@ Team members contributed to different areas of the system, including:
 
 ## Project Context
 
-This project was developed as part of a **university software engineering team project**.
+This project was developed as part of a **university team project**.
 
 The primary purpose was to apply software engineering concepts in a collaborative development environment while gaining practical experience with:
 
@@ -280,8 +280,8 @@ The primary purpose was to apply software engineering concepts in a collaborativ
 
 ## Disclaimer
 
-This repository contains work developed as part of a university team software engineering project.
+This repository contains work developed as part of a university team project.
 
-The project is intended to demonstrate my technical development, software engineering practices, Git/GitHub experience, testing experience, and contribution to collaborative Agile development.
+The project is intended to demonstrate my technical development, Git/GitHub experience, testing experience, and contribution to collaborative Agile development.
 
 Some components of the application were developed collaboratively by the wider project team.
